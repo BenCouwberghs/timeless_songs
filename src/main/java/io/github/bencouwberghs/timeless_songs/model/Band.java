@@ -19,5 +19,5 @@ public class Band {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String link_wiki_page;
+    private String linkWikiPage;
 }
