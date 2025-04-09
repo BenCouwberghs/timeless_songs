@@ -19,8 +19,11 @@ public class Song {
     @Column(nullable = false)
     private String name;
 
-    private long band;
+    @ManyToOne
+    @JoinColumn(name = "band_id", nullable = true)
+    private Band band;
 
+    @Column(nullable = true)
     private int year;
 
     @Column(nullable = false)
