@@ -26,6 +26,6 @@ public class Song {
     @Column(nullable = true)
     private int year;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String linkWikiPage;
 }
