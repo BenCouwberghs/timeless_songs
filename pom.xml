@@ -11,6 +11,7 @@
 	<groupId>io.github.bencouwberghs</groupId>
 	<artifactId>timeless_songs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>timeless_songs</name>
 	<description>A Spring project related to songs.</description>
 	<url/>
@@ -20,6 +21,11 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>model</module>
+		<module>repository</module>
+		<module>service</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
