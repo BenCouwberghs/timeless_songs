@@ -8,7 +8,7 @@
 		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>io.github.bencouwberghs</groupId>
+	<groupId>be.bencouwberghs</groupId>
 	<artifactId>timeless_songs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -25,6 +25,7 @@
 		<module>model</module>
 		<module>repository</module>
 		<module>service</module>
+		<module>app</module>
 	</modules>
 	<scm>
 		<connection/>

@@ -6,7 +6,7 @@
         <artifactId>timeless_songs</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>repository</artifactId>
-    <name>Archetype - repository</name>
+    <artifactId>app</artifactId>
+    <name>Archetype - app</name>
     <url>http://maven.apache.org</url>
 </project>
