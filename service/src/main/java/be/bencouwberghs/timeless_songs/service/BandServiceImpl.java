@@ -17,10 +17,7 @@ public class BandServiceImpl implements BandService {
 
     @Override
     public void addBand(Band band) {
-        if (band.getId() != null) {
-            throw new IllegalArgumentException("New Band can't have an id before saving: " + band.getId());
-        }
-        if(bandRepository.existsByName(band.getName())) {
+        if (bandRepository.existsByName(band.getName())) {
             throw new EntityExistsException("Band name taken: " + band.getName());
         }
         bandRepository.save(band);
@@ -28,9 +25,6 @@ public class BandServiceImpl implements BandService {
 
     @Override
     public void modifyBand(Band band) {
-        if(band.getId() == null) {
-            throw new IllegalArgumentException("This band does not seem to exist!");
-        }
         bandRepository.save(band);
     }
 
