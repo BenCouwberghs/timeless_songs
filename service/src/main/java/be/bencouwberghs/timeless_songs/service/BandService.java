@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BandService {
     void addBand(Band band);
-    Band modifyBand(Band band);
+    void modifyBand(Band band);
     void deleteBand(Band band);
     List<Band> fetchAllBands();
 }

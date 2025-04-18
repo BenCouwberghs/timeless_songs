@@ -27,8 +27,11 @@ public class BandServiceImpl implements BandService {
     }
 
     @Override
-    public Band modifyBand(Band band) {
-
+    public void modifyBand(Band band) {
+        if(band.getId() == null) {
+            throw new IllegalArgumentException("This band does not seem to exist!");
+        }
+        bandRepository.save(band);
     }
 
     @Override
