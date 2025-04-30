@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class BandServiceImplTest {
@@ -28,10 +28,18 @@ class BandServiceImplTest {
         Band band1 = new Band(1L, "band 1", "Testlink1");
         Band band2 = new Band(2L, "band 2", "Testlink2");
 
-        given(bandRepository.findAll()).willReturn(List.of(band1, band2));
+        when(bandRepository.findAll()).thenReturn(List.of(band1, band2));
         var bandList = bandService.fetchAllBands();
 
         assertThat(bandList).isNotNull();
         assertThat(bandList.size()).isEqualTo(2);
     }
+
+    void addBand() {
+        Band band3 = new Band(3L, "band 3", "Testlink3");
+
+
+    }
+
+
 }
