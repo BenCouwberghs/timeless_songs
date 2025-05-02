@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,11 +36,31 @@ class BandServiceImplTest {
         assertThat(bandList.size()).isEqualTo(2);
     }
 
+    @Test
     void addBand() {
         Band band3 = new Band(3L, "band 3", "Testlink3");
 
+        when(bandRepository.existsByName("band 3")).thenReturn(false);
+        bandService.addBand(band3);
 
+        verify(bandRepository).save(band3);
     }
 
+    @Test
+    void modifyBand() {
+        Band band4 = new Band(4L, "band 4", "Testlink4");
 
+        bandService.modifyBand(band4);
+
+        verify(bandRepository).save(band4);
+    }
+
+    @Test
+    void deleteBand() {
+        Band band5 = new Band(5L, "band 5", "Testlink5");
+
+        bandService.deleteBand(band5);
+
+        verify(bandRepository).delete(band5);
+    }
 }
