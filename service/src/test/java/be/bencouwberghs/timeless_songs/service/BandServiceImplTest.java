@@ -39,7 +39,6 @@ class BandServiceImplTest {
     void addBand() {
         Band band3 = new Band(3L, "band 3", "Testlink3");
 
-        when(bandRepository.existsByName("band 3")).thenReturn(false);
         bandService.addBand(band3);
 
         verify(bandRepository).save(band3);
