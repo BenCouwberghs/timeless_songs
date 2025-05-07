@@ -1,5 +1,5 @@
 CREATE TABLE band (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    linkWikiPage TEXT
+    link_wiki_page TEXT
 );
