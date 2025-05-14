@@ -37,4 +37,9 @@ public class BandServiceImpl implements BandService {
     public List<Band> fetchAllBands() {
         return bandRepository.findAll();
     }
+
+    @Override
+    public Band findBandByName(String name) {
+        return bandRepository.findByName(name);
+    }
 }
