@@ -39,7 +39,6 @@ class BandServiceImplTest {
     void addBand() {
         Band band3 = new Band(3L, "band 3", "Testlink3");
 
-        when(bandRepository.existsByName("band 3")).thenReturn(false);
         bandService.addBand(band3);
 
         verify(bandRepository).save(band3);
@@ -61,5 +60,14 @@ class BandServiceImplTest {
         bandService.deleteBand(band5);
 
         verify(bandRepository).delete(band5);
+    }
+
+    @Test
+    void findBandByName() {
+        Band band5 = new Band(5L, "band 5", "Testlink5");
+
+        when(bandRepository.findByName("band 5")).thenReturn(band5);
+
+        assertThat(band5).isEqualTo(bandService.findBandByName("band 5"));
     }
 }

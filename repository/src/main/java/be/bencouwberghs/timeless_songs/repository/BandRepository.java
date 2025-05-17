@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BandRepository extends JpaRepository<Band, Long> {
     boolean existsByName(String name);
+
+    Band findByName(String name);
 }
