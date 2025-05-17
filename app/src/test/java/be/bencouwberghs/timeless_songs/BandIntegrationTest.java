@@ -32,7 +32,7 @@ public class BandIntegrationTest {
 
         bandService.addBand(band3);
 
-        assertNotNull(band3.getId());
+        assertNotNull(bandService.findBandByName("band 3"));
     }
 
     @Test
