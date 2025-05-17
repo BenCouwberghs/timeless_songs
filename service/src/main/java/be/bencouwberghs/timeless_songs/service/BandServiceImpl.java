@@ -5,6 +5,7 @@ import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,11 +21,14 @@ public class BandServiceImpl implements BandService {
         if (bandRepository.existsByName(band.getName())) {
             throw new EntityExistsException("Band name taken: " + band.getName());
         }
+        band.setDateCreation(LocalDateTime.now());
+        band.setDateLastModified(LocalDateTime.now());
         bandRepository.save(band);
     }
 
     @Override
     public void modifyBand(Band band) {
+        band.setDateLastModified(LocalDateTime.now());
         bandRepository.save(band);
     }
 
