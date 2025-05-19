@@ -1,19 +1,17 @@
 package be.bencouwberghs.timeless_songs.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Band {
+public class Band extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,10 +21,4 @@ public class Band {
 
     @Column(nullable = true)
     private String linkWikiPage;
-
-    @Column(nullable = false)
-    private LocalDateTime dateCreation;
-
-    @Column(nullable = false)
-    private LocalDateTime dateLastModified;
 }
