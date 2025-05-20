@@ -3,14 +3,17 @@ package be.bencouwberghs.timeless_songs;
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -22,6 +25,14 @@ public class BandIntegrationTest {
 
     @Autowired
     private BandService bandService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @TestConfiguration
+    @EnableJpaAuditing
+    static class TestAuditingConfig {
+    }
 
     @Test
     void addBand() {
@@ -79,5 +90,22 @@ public class BandIntegrationTest {
         bandService.addBand(band2);
 
         assertEquals(2, bandService.fetchAllBands().size());
+    }
+
+    @Test
+    void auditBand() {
+        Band band = new Band();
+
+        band.setName("band 1");
+        band.setLinkWikiPage("testlink1");
+
+        bandService.addBand(band);
+
+        band.setName("Beatles");
+        bandService.modifyBand(band);
+
+        entityManager.flush();
+
+        assertNotEquals(band.getCreatedDate(), band.getDateLastModified());
     }
 }
