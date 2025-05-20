@@ -20,9 +20,9 @@ public abstract class AuditableEntity {
 
     @CreatedDate
     @Column(nullable = false)
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime dateLastModified = LocalDateTime.now();
+    private LocalDateTime dateLastModified;
 }
