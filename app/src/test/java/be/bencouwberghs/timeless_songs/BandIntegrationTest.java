@@ -8,8 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
+@Import(TestAuditingConfig.class)
 public class BandIntegrationTest {
 
     @Autowired
@@ -28,11 +28,6 @@ public class BandIntegrationTest {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @TestConfiguration
-    @EnableJpaAuditing
-    static class TestAuditingConfig {
-    }
 
     @Test
     void addBand() {
