@@ -25,8 +25,17 @@ class BandServiceImplTest {
 
     @Test
     void fetchAllBands() {
-        Band band1 = new Band(1L, "band 1", "Testlink1");
-        Band band2 = new Band(2L, "band 2", "Testlink2");
+        Band band1 = new Band() {{
+            setId(1L);
+            setName("band 1");
+            setLinkWikiPage("Testlink1");
+        }};
+
+        Band band2 = new Band() {{
+            setId(2L);
+            setName("band 2");
+            setLinkWikiPage("Testlink2");
+        }};
 
         when(bandRepository.findAll()).thenReturn(List.of(band1, band2));
         var bandList = bandService.fetchAllBands();
@@ -37,7 +46,11 @@ class BandServiceImplTest {
 
     @Test
     void addBand() {
-        Band band3 = new Band(3L, "band 3", "Testlink3");
+        Band band3 = new Band() {{
+            setId(3L);
+            setName("band 3");
+            setLinkWikiPage("Testlink3");
+        }};
 
         bandService.addBand(band3);
 
@@ -46,7 +59,11 @@ class BandServiceImplTest {
 
     @Test
     void modifyBand() {
-        Band band4 = new Band(4L, "band 4", "Testlink4");
+        Band band4 = new Band() {{
+            setId(4L);
+            setName("band 4");
+            setLinkWikiPage("Testlink4");
+        }};
 
         bandService.modifyBand(band4);
 
@@ -55,7 +72,11 @@ class BandServiceImplTest {
 
     @Test
     void deleteBand() {
-        Band band5 = new Band(5L, "band 5", "Testlink5");
+        Band band5 = new Band() {{
+            setId(5L);
+            setName("band 5");
+            setLinkWikiPage("Testlink5");
+        }};
 
         bandService.deleteBand(band5);
 
@@ -64,7 +85,12 @@ class BandServiceImplTest {
 
     @Test
     void findBandByName() {
-        Band band5 = new Band(5L, "band 5", "Testlink5");
+        Band band5 = new Band() {{
+            setId(5L);
+            setName("band 5");
+            setLinkWikiPage("Testlink5");
+        }};
+
 
         when(bandRepository.findByName("band 5")).thenReturn(band5);
 
