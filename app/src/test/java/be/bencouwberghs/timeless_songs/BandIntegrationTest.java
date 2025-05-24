@@ -99,8 +99,9 @@ public class BandIntegrationTest {
         band.setName("Beatles");
         bandService.modifyBand(band);
 
-        entityManager.flush();
+        // got to fetch the updated audit values back from the DB
+        Band updatedBand = bandService.findBandByName("Beatles");
 
-        assertNotEquals(band.getCreatedDate(), band.getDateLastModified());
+        assertTrue(updatedBand.getDateLastModified().isAfter(updatedBand.getCreatedDate()));
     }
 }
