@@ -17,13 +17,10 @@ public class BandController {
     // TODO: possibly use Dto with requestBody over a simple string as we only have
     //  1 non nullable property for band right now.
     @PostMapping("/bands")
-    public ResponseEntity<String> addBand(String bandName) {
+    public ResponseEntity<String> addBand(@RequestBody BandDto bandDto) {
         try {
-            Band band = new Band();
-            band.setName(bandName);
-            bandService.addBand(band);
-
-            return ResponseEntity.ok("Successfully added the band " + bandName);
+            bandService.addBand(bandDto);
+            return ResponseEntity.ok("Successfully added the band " + bandDto.getName());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

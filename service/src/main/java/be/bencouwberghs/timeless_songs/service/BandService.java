@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface BandService {
     void addBand(Band band);
+    void addBand(BandDto bandDto);
     void modifyBand(Band band);
     void updateBand(Long id, BandDto bandDto);
     void deleteBand(Band band);

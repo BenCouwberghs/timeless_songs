@@ -28,6 +28,20 @@ public class BandServiceImpl implements BandService {
     }
 
     @Override
+    public void addBand(BandDto bandDto) {
+        Band band = new Band();
+        if (bandDto.getName() != null) {
+            band.setName(bandDto.getName());
+        }
+
+        if (bandDto.getWikiLinkPage() != null) {
+            band.setLinkWikiPage(bandDto.getWikiLinkPage());
+        }
+
+        addBand(band);
+    }
+
+    @Override
     public void modifyBand(Band band) {
         if (!Objects.equals(bandRepository.findByName(band.getName()).getId(), band.getId())) {
             throw new EntityExistsException("Changed band name is already taken: " + band.getName());
