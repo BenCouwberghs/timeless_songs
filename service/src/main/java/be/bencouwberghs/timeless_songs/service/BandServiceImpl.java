@@ -1,6 +1,7 @@
 package be.bencouwberghs.timeless_songs.service;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,21 @@ public class BandServiceImpl implements BandService {
             throw new EntityExistsException("Changed band name is already taken: " + band.getName());
         }
         bandRepository.save(band);
+    }
+
+    @Override
+    public void updateBand(Long id, BandDto bandDto) {
+        Band band = bandRepository.getReferenceById(id);
+
+        if (bandDto.getName() != null) {
+            band.setName(bandDto.getName());
+        }
+
+        if (bandDto.getWikiLinkPage() != null) {
+            band.setLinkWikiPage(bandDto.getWikiLinkPage());
+        }
+
+        modifyBand(band);
     }
 
     @Override
