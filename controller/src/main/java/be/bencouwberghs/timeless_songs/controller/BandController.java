@@ -14,8 +14,6 @@ public class BandController {
         this.bandService = bandService;
     }
 
-    // TODO: possibly use Dto with requestBody over a simple string as we only have
-    //  1 non nullable property for band right now.
     @PostMapping("/bands")
     public ResponseEntity<String> addBand(@RequestBody BandDto bandDto) {
         try {
