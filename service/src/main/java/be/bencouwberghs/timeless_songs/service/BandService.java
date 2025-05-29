@@ -11,6 +11,7 @@ public interface BandService {
     void modifyBand(Band band);
     void updateBand(Long id, BandDto bandDto);
     void deleteBand(Band band);
+    void deleteBand(Long id);
     List<Band> fetchAllBands();
     Band findBandByName(String name);
 }

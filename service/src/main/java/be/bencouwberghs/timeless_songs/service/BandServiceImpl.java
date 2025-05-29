@@ -64,9 +64,17 @@ public class BandServiceImpl implements BandService {
         modifyBand(band);
     }
 
+    // TODO: Need to make it so to check if band sitll has a song and if that's the case throw an exception.
+
     @Override
     public void deleteBand(Band band) {
         bandRepository.delete(band);
+    }
+
+    @Override
+    public void deleteBand(Long id) {
+        Band band = bandRepository.getReferenceById(id);
+        deleteBand(band);
     }
 
     @Override
