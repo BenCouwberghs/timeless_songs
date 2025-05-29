@@ -38,7 +38,7 @@ public class BandController {
     @DeleteMapping("/bands/{id}")
     public ResponseEntity<String> deleteBand(@PathVariable Long id) {
         try {
-            // function call to delete band
+            bandService.deleteBand(id);
             return ResponseEntity.ok("Successfully deleted band.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
