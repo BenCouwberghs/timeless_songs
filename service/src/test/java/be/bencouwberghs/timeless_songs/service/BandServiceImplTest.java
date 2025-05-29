@@ -65,6 +65,8 @@ class BandServiceImplTest {
             setLinkWikiPage("Testlink4");
         }};
 
+        when(bandRepository.findByName(band4.getName())).thenReturn(band4);
+
         bandService.modifyBand(band4);
 
         verify(bandRepository).save(band4);
