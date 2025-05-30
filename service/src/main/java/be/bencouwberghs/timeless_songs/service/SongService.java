@@ -10,5 +10,5 @@ public interface SongService {
     void modifySong(Song song);
     void deleteSong(Song song);
     List<Song> fetchAllSongs();
-    List<Song> fetchAllSongsOfBand();
+    List<Song> fetchAllSongsOfBand(Band band);
 }
