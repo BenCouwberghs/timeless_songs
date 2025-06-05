@@ -9,5 +9,5 @@ import java.util.List;
 public interface SongRepository extends JpaRepository<Song, Long> {
     boolean existsByName(String name);
     Song findByName(String name);
-    List<Song> fetchAllSongsOfBand(Band band);
+    List<Song> findAllByBand(Band band);
 }
