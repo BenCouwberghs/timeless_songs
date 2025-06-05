@@ -3,45 +3,55 @@ package be.bencouwberghs.timeless_songs.controller;
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.service.BandService;
+import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
+import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
+import be.bencouwberghs.timeless_songs.service.validator.ValidateEntities;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
+@AllArgsConstructor
 public class BandController {
     private final BandService bandService;
 
-    public BandController(BandService bandService) {
-        this.bandService = bandService;
-    }
+    private final MapperEntities mapperEntities;
+
+    private final ValidateEntities validateEntities;
 
     @PostMapping("/bands")
     public ResponseEntity<String> addBand(@RequestBody BandDto bandDto) {
         try {
-            bandService.addBand(bandDto);
+            validateEntities.validateBand(bandDto);
+            Band newBand = mapperEntities.mapBandDtoToBandEntity(bandDto);
+            bandService.addBand(newBand);
             return ResponseEntity.ok("Successfully added the band " + bandDto.getName());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (UserInputException userInputException) {
+            return ResponseEntity.badRequest().body(userInputException.getMessage());
         }
     }
 
-    @PatchMapping("/bands/{id}")
-    public ResponseEntity<String> modifyBand(@PathVariable Long id, @RequestBody BandDto bandDto) {
+    @PatchMapping("/bands")
+    public ResponseEntity<String> modifyBand(@RequestBody BandDto bandDto) {
         try {
-            bandService.updateBand(id, bandDto);
+            validateEntities.validateBand(bandDto);
+            Band newBand = mapperEntities.mapBandDtoToBandEntity(bandDto);
+            bandService.modifyBand(newBand);
             return ResponseEntity.ok("Successfully updated band.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (UserInputException userInputException) {
+            return ResponseEntity.badRequest().body(userInputException.getMessage());
         }
-
     }
 
-    @DeleteMapping("/bands/{id}")
-    public ResponseEntity<String> deleteBand(@PathVariable Long id) {
+    @DeleteMapping("/bands")
+    public ResponseEntity<String> deleteBand(@RequestBody BandDto bandDto) {
         try {
-            bandService.deleteBand(id);
+            validateEntities.validateBand(bandDto);
+            Band newBand = mapperEntities.mapBandDtoToBandEntity(bandDto);
+            bandService.deleteBand(newBand);
             return ResponseEntity.ok("Successfully deleted band.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (UserInputException userInputException) {
+            return ResponseEntity.badRequest().body(userInputException.getMessage());
         }
     }
 
