@@ -28,20 +28,6 @@ public class BandServiceImpl implements BandService {
     }
 
     @Override
-    public void addBand(BandDto bandDto) {
-        Band band = new Band();
-        if (bandDto.getName() != null) {
-            band.setName(bandDto.getName());
-        }
-
-        if (bandDto.getWikiLinkPage() != null) {
-            band.setLinkWikiPage(bandDto.getWikiLinkPage());
-        }
-
-        addBand(band);
-    }
-
-    @Override
     public void modifyBand(Band band) {
         if (!Objects.equals(bandRepository.findByName(band.getName()).getId(), band.getId())) {
             throw new EntityExistsException("Changed band name is already taken: " + band.getName());
@@ -49,32 +35,11 @@ public class BandServiceImpl implements BandService {
         bandRepository.save(band);
     }
 
-    @Override
-    public void updateBand(Long id, BandDto bandDto) {
-        Band band = bandRepository.getReferenceById(id);
-
-        if (bandDto.getName() != null) {
-            band.setName(bandDto.getName());
-        }
-
-        if (bandDto.getWikiLinkPage() != null) {
-            band.setLinkWikiPage(bandDto.getWikiLinkPage());
-        }
-
-        modifyBand(band);
-    }
-
-    // TODO: Need to make it so to check if band sitll has a song and if that's the case throw an exception.
+    // TODO: Need to make it so to check if band still has a song and if that's the case throw an exception.
 
     @Override
     public void deleteBand(Band band) {
         bandRepository.delete(band);
-    }
-
-    @Override
-    public void deleteBand(Long id) {
-        Band band = bandRepository.getReferenceById(id);
-        deleteBand(band);
     }
 
     @Override
