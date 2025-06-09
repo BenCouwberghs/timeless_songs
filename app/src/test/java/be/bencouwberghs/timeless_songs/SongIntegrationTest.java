@@ -42,7 +42,7 @@ public class SongIntegrationTest {
 
         songService.addSong(song1);
 
-        assertNotNull(songService.fetchAllSongs());
+        assertTrue(songService.fetchAllSongs().contains(song1));
     }
 
     @Test
