@@ -6,7 +6,6 @@ import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +40,6 @@ public class SongServiceImpl implements SongService {
     }
 
     public List<Song> fetchAllSongsOfBand(Band band) {
-        return songRepository.fetchAllSongsOfBand(band);
+        return songRepository.findAllByBand(band);
     }
 }

@@ -104,7 +104,7 @@ public class SongServiceImplTest {
             setBand(band);
         }};
 
-        when(songRepository.fetchAllSongsOfBand(band)).thenReturn(List.of(song4, song5));
+        when(songRepository.findAllByBand(band)).thenReturn(List.of(song4, song5));
         var songList = songService.fetchAllSongsOfBand(band);
 
         assertThat(songList).isNotNull();
