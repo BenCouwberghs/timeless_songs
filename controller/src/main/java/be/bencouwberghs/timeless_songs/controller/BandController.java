@@ -2,6 +2,7 @@ package be.bencouwberghs.timeless_songs.controller;
 
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
+import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 @AllArgsConstructor
 public class BandController {
+    private final BandRepository bandRepository;
+
     private final BandService bandService;
 
     private final MapperEntities mapperEntities;
@@ -43,15 +46,13 @@ public class BandController {
         }
     }
 
-    @DeleteMapping("/bands")
-    public ResponseEntity<String> deleteBand(@RequestBody BandDto bandDto) {
+    @DeleteMapping("/bands/{id}")
+    public ResponseEntity<String> deleteBand(@RequestParam Long id) {
         try {
-            validateEntities.validateBand(bandDto);
-            Band newBand = mapperEntities.mapBandDtoToBandEntity(bandDto);
-            bandService.deleteBand(newBand);
+            bandService.deleteBand(bandRepository.getReferenceById(id));
             return ResponseEntity.ok("Successfully deleted band.");
-        } catch (UserInputException userInputException) {
-            return ResponseEntity.badRequest().body(userInputException.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
