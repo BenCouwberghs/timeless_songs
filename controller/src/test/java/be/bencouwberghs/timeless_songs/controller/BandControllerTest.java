@@ -13,6 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -87,5 +90,24 @@ class BandControllerTest {
         bandController.deleteBand(id);
 
         verify(bandService).deleteBand(band3);
+    }
+
+    @Test
+    void getAllBands() {
+        Band band4 = new Band() {{
+            setName("band 4");
+            setLinkWikiPage("testLink 4");
+        }};
+
+        Band band5 = new Band() {{
+            setName("band 5");
+            setLinkWikiPage("testLink 5");
+        }};
+
+        when(bandService.fetchAllBands()).thenReturn(List.of(band4, band5));
+        var bandList = bandController.getAllBands();
+
+        assertThat(bandList).isNotNull();
+        assertThat(bandList.size()).isEqualTo(2);
     }
 }
