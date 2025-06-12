@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/")
 @AllArgsConstructor
@@ -55,6 +57,11 @@ public class BandController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/bands")
+    public List<Band> getAllBands() {
+        return bandService.fetchAllBands();
     }
 
 }
