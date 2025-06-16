@@ -50,7 +50,7 @@ public class BandController {
     }
 
     @DeleteMapping("/bands/{id}")
-    public ResponseEntity<String> deleteBand(@RequestParam Long id) {
+    public ResponseEntity<String> deleteBand(@PathVariable Long id) {
         try {
             bandService.deleteBand(bandRepository.getReferenceById(id));
             return ResponseEntity.ok("Successfully deleted band.");
