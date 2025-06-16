@@ -1,6 +1,7 @@
 package be.bencouwberghs.timeless_songs.service;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 
 import java.util.List;
 

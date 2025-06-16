@@ -34,6 +34,8 @@ public class BandServiceImpl implements BandService {
         bandRepository.save(band);
     }
 
+    // TODO: Need to make it so to check if band still has a song and if that's the case throw an exception.
+
     @Override
     public void deleteBand(Band band) {
         bandRepository.delete(band);
