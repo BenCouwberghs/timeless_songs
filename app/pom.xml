@@ -14,13 +14,16 @@
             <groupId>be.bencouwberghs</groupId>
             <artifactId>repository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>be.bencouwberghs</groupId>
             <artifactId>service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>be.bencouwberghs</groupId>
+            <artifactId>controller</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
