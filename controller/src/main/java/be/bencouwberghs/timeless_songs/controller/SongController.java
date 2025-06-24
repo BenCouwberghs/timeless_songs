@@ -1,8 +1,10 @@
 package be.bencouwberghs.timeless_songs.controller;
 
+import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.SongService;
+import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import be.bencouwberghs.timeless_songs.service.validator.ValidateEntities;
 import lombok.AllArgsConstructor;
@@ -25,9 +27,12 @@ public class SongController {
     @PostMapping("/songs")
     public ResponseEntity<String> addSong(@RequestBody SongDto songDto) {
         try {
-            return ResponseEntity.ok("");
-        } catch () {
-            return ResponseEntity.badRequest().body("");
+            validateEntities.validateSong(songDto);
+            Song newSong = mapperEntities.mapSongDtoToSongEntity(songDto);
+            songService.addSong(newSong);
+            return ResponseEntity.ok("Successfully added the song " + songDto.getName());
+        } catch (UserInputException userInputException) {
+            return ResponseEntity.badRequest().body(userInputException.getMessage());
         }
     }
 }
