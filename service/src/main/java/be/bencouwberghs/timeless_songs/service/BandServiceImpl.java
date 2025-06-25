@@ -41,6 +41,10 @@ public class BandServiceImpl implements BandService {
         bandRepository.delete(band);
     }
 
+    public Band fetchBand(Long id) {
+        return bandRepository.getReferenceById(id);
+    }
+
     @Override
     public List<Band> fetchAllBands() {
         return bandRepository.findAll();

@@ -9,6 +9,7 @@ public interface BandService {
     void addBand(Band band);
     void modifyBand(Band band);
     void deleteBand(Band band);
+    Band fetchBand(Long id);
     List<Band> fetchAllBands();
     Band findBandByName(String name);
 }
