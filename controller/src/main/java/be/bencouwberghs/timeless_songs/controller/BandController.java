@@ -2,7 +2,6 @@ package be.bencouwberghs.timeless_songs.controller;
 
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
-import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -17,8 +16,6 @@ import java.util.List;
 @RequestMapping("/")
 @AllArgsConstructor
 public class BandController {
-    private final BandRepository bandRepository;
-
     private final BandService bandService;
 
     private final MapperEntities mapperEntities;
@@ -52,7 +49,7 @@ public class BandController {
     @DeleteMapping("/bands/{id}")
     public ResponseEntity<String> deleteBand(@PathVariable Long id) {
         try {
-            bandService.deleteBand(bandRepository.getReferenceById(id));
+            bandService.deleteBand(bandService.fetchBand(id));
             return ResponseEntity.ok("Successfully deleted band.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -66,7 +63,7 @@ public class BandController {
 
     @GetMapping("/bands/{id}")
     public Band getBand(@PathVariable Long id) {
-        return bandRepository.getReferenceById(id);
+        return bandService.fetchBand(id);
     }
 
 }
