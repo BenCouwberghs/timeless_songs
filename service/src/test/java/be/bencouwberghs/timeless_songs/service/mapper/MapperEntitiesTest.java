@@ -1,7 +1,9 @@
 package be.bencouwberghs.timeless_songs.service.mapper;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
+import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,5 +44,39 @@ class MapperEntitiesTest {
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandDtoToBandEntity(bandDto));
+    }
+
+    @Test
+    void mapSongEntityToDto() {
+        Song song = new Song() {{
+            setId(1L);
+            setName("song 1");
+            setLinkWikiPage("testLink 1");
+        }};
+
+        SongDto expected = SongDto.builder()
+                .id(1L)
+                .name("song 1")
+                .wikiLinkPage("testLink 1")
+                .build();
+
+        assertEquals(expected, mapperEntities.mapSongEntityToDto(song));
+    }
+
+    @Test
+    void mapSongDtoToSongEntity() {
+        Song expected = new Song() {{
+            setId(2L);
+            setName("song 2");
+            setLinkWikiPage("testLink 2");
+        }};
+
+        SongDto songDto = SongDto.builder()
+                .id(2L)
+                .name("song 2")
+                .wikiLinkPage("testLink 2")
+                .build();
+
+        assertEquals(expected, mapperEntities.mapSongDtoToSongEntity(songDto));
     }
 }
