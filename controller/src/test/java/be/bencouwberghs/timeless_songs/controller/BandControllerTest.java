@@ -86,7 +86,7 @@ class BandControllerTest {
 
         Long id = 3L;
 
-        when(bandRepository.getReferenceById(id)).thenReturn(band3);
+        when(bandService.fetchBand(id)).thenReturn(band3);
         bandController.deleteBand(id);
 
         verify(bandService).deleteBand(band3);
@@ -109,5 +109,21 @@ class BandControllerTest {
 
         assertThat(bandList).isNotNull();
         assertThat(bandList.size()).isEqualTo(2);
+    }
+
+    @Test
+    void getBand() {
+        Band band6 = new Band() {{
+            setId(6L);
+            setName("band 6");
+            setLinkWikiPage("testLink 6");
+        }};
+
+        Long id = 6L;
+
+        when(bandService.fetchBand(id)).thenReturn(band6);
+        bandController.getBand(id);
+
+        verify(bandService).fetchBand(id);
     }
 }
