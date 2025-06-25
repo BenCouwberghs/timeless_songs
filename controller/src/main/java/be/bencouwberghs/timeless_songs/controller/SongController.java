@@ -2,7 +2,6 @@ package be.bencouwberghs.timeless_songs.controller;
 
 import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
-import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.SongService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -16,8 +15,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class SongController {
-    private final SongRepository songRepository;
-
     private final SongService songService;
 
     private final MapperEntities mapperEntities;
@@ -51,7 +48,7 @@ public class SongController {
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<String> deleteSong(@PathVariable Long id) {
         try {
-            songService.deleteSong(songRepository.getReferenceById(id));
+            songService.deleteSong(songService.fetchSong(id));
             return ResponseEntity.ok("Successfully deleted song.");
         } catch (Exception e) {
             return  ResponseEntity.badRequest().body(e.getMessage());
@@ -65,6 +62,6 @@ public class SongController {
 
     @GetMapping("/songs/{id}")
     public Song getSong(@PathVariable Long id) {
-        return songRepository.getReferenceById(id);
+        return songService.fetchSong(id);
     }
 }
