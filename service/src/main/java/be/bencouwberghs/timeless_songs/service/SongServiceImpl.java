@@ -35,6 +35,10 @@ public class SongServiceImpl implements SongService {
         songRepository.delete(song);
     }
 
+    public Song fetchSong(Long id) {
+        return songRepository.getReferenceById(id);
+    }
+
     public List<Song> fetchAllSongs() {
         return songRepository.findAll();
     }

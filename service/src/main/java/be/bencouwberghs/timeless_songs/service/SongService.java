@@ -9,6 +9,7 @@ public interface SongService {
     void addSong(Song song);
     void modifySong(Song song);
     void deleteSong(Song song);
+    Song fetchSong(Long id);
     List<Song> fetchAllSongs();
     List<Song> fetchAllSongsOfBand(Band band);
 }
