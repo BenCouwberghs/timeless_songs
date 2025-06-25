@@ -64,4 +64,9 @@ public class BandController {
         return bandService.fetchAllBands();
     }
 
+    @GetMapping("/bands/{id}")
+    public Band getBand(@PathVariable Long id) {
+        return bandRepository.getReferenceById(id);
+    }
+
 }
