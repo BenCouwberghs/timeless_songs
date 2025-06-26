@@ -98,4 +98,20 @@ class BandServiceImplTest {
 
         assertThat(band5).isEqualTo(bandService.findBandByName("band 5"));
     }
+
+    @Test
+    void getBand() {
+        Band band6 = new Band() {{
+            setId(6L);
+            setName("band 6");
+            setLinkWikiPage("Testlink6");
+        }};
+
+        Long id = 6L;
+
+        when(bandRepository.getReferenceById(id)).thenReturn(band6);
+        bandService.fetchBand(id);
+
+        verify(bandRepository).getReferenceById(id);
+    }
 }
