@@ -137,4 +137,16 @@ public class SongIntegrationTest {
         Song updatedSong = songRepository.findByName("Imagine");
         assertTrue(updatedSong.getDateLastModified().isAfter(updatedSong.getCreatedDate()));
     }
+
+    @Test
+    void getSong() {
+        Song song10 = new Song();
+
+        song10.setName("song 1");
+        song10.setYear(1990);
+
+        songService.addSong(song10);
+
+        assertEquals(song10, songService.fetchSong(song10.getId()));
+    }
 }
