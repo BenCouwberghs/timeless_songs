@@ -2,7 +2,6 @@ package be.bencouwberghs.timeless_songs.controller;
 
 import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
-import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.SongService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -20,9 +19,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SongControllerTest {
-
-    @Mock
-    private SongRepository songRepository;
 
     @Mock
     private SongService songService;
