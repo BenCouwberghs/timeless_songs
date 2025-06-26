@@ -2,7 +2,6 @@ package be.bencouwberghs.timeless_songs.controller;
 
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
-import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -20,9 +19,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BandControllerTest {
-
-    @Mock
-    private BandRepository bandRepository;
 
     @Mock
     private MapperEntities mapperEntities;
