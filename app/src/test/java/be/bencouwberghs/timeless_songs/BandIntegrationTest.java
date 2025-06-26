@@ -104,4 +104,17 @@ public class BandIntegrationTest {
 
         assertTrue(updatedBand.getDateLastModified().isAfter(updatedBand.getCreatedDate()));
     }
+
+    @Test
+    void getBand() {
+        Band band = new Band();
+
+        band.setName("band 1");
+        band.setLinkWikiPage("testlink1");
+
+        bandService.addBand(band);
+        band = bandService.findBandByName("band 1");
+
+        assertEquals(band, bandService.fetchBand(band.getId()));
+    }
 }
