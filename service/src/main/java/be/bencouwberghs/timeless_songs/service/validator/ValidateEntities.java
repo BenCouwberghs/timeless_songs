@@ -15,7 +15,7 @@ public class ValidateEntities {
     }
 
     public void validateSong(SongDto songDto) throws UserInputException {
-        if (songDto.getName() == null || songDto.getYear() == 0 || songDto.getWikiLinkPage() == null) {
+        if (songDto.getName() == null) {
             throw new UserInputException("Please fill in all needed properties");
         }
     }
