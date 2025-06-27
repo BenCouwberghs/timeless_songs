@@ -48,7 +48,7 @@ public class SongController {
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<String> deleteSong(@PathVariable Long id) {
         try {
-            songService.deleteSong(songService.fetchSong(id));
+            songService.deleteSongById(id);
             return ResponseEntity.ok("Successfully deleted song.");
         } catch (Exception e) {
             return  ResponseEntity.badRequest().body(e.getMessage());

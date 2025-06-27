@@ -87,10 +87,9 @@ class SongControllerTest {
 
         Long id = 3L;
 
-        when(songService.fetchSong(id)).thenReturn(song3);
         songController.deleteSong(id);
 
-        verify(songService).deleteSong(song3);
+        verify(songService).deleteSongById(id);
     }
 
     @Test

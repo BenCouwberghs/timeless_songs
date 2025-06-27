@@ -58,7 +58,9 @@ public class SongServiceImplTest {
             setYear(1990);
         }};
 
-        songService.deleteSong(song3);
+        when(songRepository.getReferenceById(song3.getId())).thenReturn(song3);
+
+        songService.deleteSongById(song3.getId());
         verify(songRepository).delete(song3);
     }
 

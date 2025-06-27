@@ -31,8 +31,8 @@ public class SongServiceImpl implements SongService {
         songRepository.save(song);
     }
 
-    public void deleteSong(Song song) {
-        songRepository.delete(song);
+    public void deleteSongById(Long id) {
+        songRepository.delete(fetchSong(id));
     }
 
     public Song fetchSong(Long id) {

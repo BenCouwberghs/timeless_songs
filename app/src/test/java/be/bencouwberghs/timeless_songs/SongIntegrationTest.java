@@ -68,7 +68,7 @@ public class SongIntegrationTest {
         song3.setYear(1990);
 
         songService.addSong(song3);
-        songService.deleteSong(song3);
+        songService.deleteSongById(song3.getId());
 
         assertEquals(0, songService.fetchAllSongs().size());
     }
