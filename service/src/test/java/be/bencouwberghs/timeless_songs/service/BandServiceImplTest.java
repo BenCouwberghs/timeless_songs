@@ -80,7 +80,8 @@ class BandServiceImplTest {
             setLinkWikiPage("Testlink5");
         }};
 
-        bandService.deleteBand(band5);
+        when(bandRepository.getReferenceById(band5.getId())).thenReturn(band5);
+        bandService.deleteBandById(band5.getId());
 
         verify(bandRepository).delete(band5);
     }

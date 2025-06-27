@@ -82,10 +82,10 @@ class BandControllerTest {
 
         Long id = 3L;
 
-        when(bandService.fetchBand(id)).thenReturn(band3);
+
         bandController.deleteBand(id);
 
-        verify(bandService).deleteBand(band3);
+        verify(bandService).deleteBandById(id);
     }
 
     @Test

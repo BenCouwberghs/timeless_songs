@@ -64,7 +64,7 @@ public class BandIntegrationTest {
         band5.setLinkWikiPage("testlink5");
 
         bandService.addBand(band5);
-        bandService.deleteBand(band5);
+        bandService.deleteBandById(band5.getId());
 
         assertEquals(0, bandService.fetchAllBands().size());
     }

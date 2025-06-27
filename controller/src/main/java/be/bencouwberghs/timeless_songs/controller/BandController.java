@@ -46,10 +46,11 @@ public class BandController {
         }
     }
 
+    // change service method to deleteBandById and adapt changes here and the tests, same for song.
     @DeleteMapping("/bands/{id}")
     public ResponseEntity<String> deleteBand(@PathVariable Long id) {
         try {
-            bandService.deleteBand(bandService.fetchBand(id));
+            bandService.deleteBandById(id);
             return ResponseEntity.ok("Successfully deleted band.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

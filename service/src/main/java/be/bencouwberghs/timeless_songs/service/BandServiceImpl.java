@@ -4,7 +4,6 @@ import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -36,8 +35,8 @@ public class BandServiceImpl implements BandService {
     // TODO: Need to make it so to check if band still has a song and if that's the case throw an exception.
 
 
-    public void deleteBand(Band band) {
-        bandRepository.delete(band);
+    public void deleteBandById(Long id) {
+        bandRepository.delete(fetchBand(id));
     }
 
     public Band fetchBand(Long id) {
