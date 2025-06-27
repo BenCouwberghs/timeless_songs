@@ -33,7 +33,7 @@ class ValidateEntitiesTest {
     @Test
     void validateSongFail() {
         SongDto songDto = SongDto.builder()
-                .name("song 1")
+                .year(1990)
                 .build();
 
         assertThrows(UserInputException.class, () -> validateEntities.validateSong(songDto));
