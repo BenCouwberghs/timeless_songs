@@ -100,7 +100,9 @@ public class BandIntegrationTest {
         bandService.modifyBand(band);
 
         // got to fetch the updated audit values back from the DB
-        Band updatedBand = bandService.findBandByName("Beatles");
+        // values only update this way when we call directly on the repository and not via the service,
+        // despite the method call in the service relying on the repository.
+        Band updatedBand = bandRepository.findByName("Beatles");
 
         assertTrue(updatedBand.getDateLastModified().isAfter(updatedBand.getCreatedDate()));
     }
