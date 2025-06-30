@@ -64,7 +64,7 @@ public class BandIntegrationTest {
         band5.setLinkWikiPage("testlink5");
 
         bandService.addBand(band5);
-        bandService.deleteBand(band5);
+        bandService.deleteBandById(band5.getId());
 
         assertEquals(0, bandService.fetchAllBands().size());
     }
@@ -100,8 +100,23 @@ public class BandIntegrationTest {
         bandService.modifyBand(band);
 
         // got to fetch the updated audit values back from the DB
-        Band updatedBand = bandService.findBandByName("Beatles");
+        // values only update this way when we call directly on the repository and not via the service,
+        // despite the method call in the service relying on the repository.
+        Band updatedBand = bandRepository.findByName("Beatles");
 
         assertTrue(updatedBand.getDateLastModified().isAfter(updatedBand.getCreatedDate()));
+    }
+
+    @Test
+    void getBand() {
+        Band band = new Band();
+
+        band.setName("band 1");
+        band.setLinkWikiPage("testlink1");
+
+        bandService.addBand(band);
+        band = bandService.findBandByName("band 1");
+
+        assertEquals(band, bandService.fetchBand(band.getId()));
     }
 }

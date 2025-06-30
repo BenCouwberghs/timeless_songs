@@ -2,7 +2,6 @@ package be.bencouwberghs.timeless_songs.controller;
 
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
-import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -20,9 +19,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BandControllerTest {
-
-    @Mock
-    private BandRepository bandRepository;
 
     @Mock
     private MapperEntities mapperEntities;
@@ -86,10 +82,10 @@ class BandControllerTest {
 
         Long id = 3L;
 
-        when(bandRepository.getReferenceById(id)).thenReturn(band3);
+
         bandController.deleteBand(id);
 
-        verify(bandService).deleteBand(band3);
+        verify(bandService).deleteBandById(id);
     }
 
     @Test
@@ -109,5 +105,21 @@ class BandControllerTest {
 
         assertThat(bandList).isNotNull();
         assertThat(bandList.size()).isEqualTo(2);
+    }
+
+    @Test
+    void getBand() {
+        Band band6 = new Band() {{
+            setId(6L);
+            setName("band 6");
+            setLinkWikiPage("testLink 6");
+        }};
+
+        Long id = 6L;
+
+        when(bandService.fetchBand(id)).thenReturn(band6);
+        bandController.getBand(id);
+
+        verify(bandService).fetchBand(id);
     }
 }

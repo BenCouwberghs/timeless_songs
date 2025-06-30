@@ -8,7 +8,8 @@ import java.util.List;
 public interface SongService {
     void addSong(Song song);
     void modifySong(Song song);
-    void deleteSong(Song song);
+    void deleteSongById(Long id);
+    Song fetchSong(Long id);
     List<Song> fetchAllSongs();
     List<Song> fetchAllSongsOfBand(Band band);
 }

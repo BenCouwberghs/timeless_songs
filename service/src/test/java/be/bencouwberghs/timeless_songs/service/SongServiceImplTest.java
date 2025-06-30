@@ -58,7 +58,9 @@ public class SongServiceImplTest {
             setYear(1990);
         }};
 
-        songService.deleteSong(song3);
+        when(songRepository.getReferenceById(song3.getId())).thenReturn(song3);
+
+        songService.deleteSongById(song3.getId());
         verify(songRepository).delete(song3);
     }
 
@@ -109,5 +111,21 @@ public class SongServiceImplTest {
 
         assertThat(songList).isNotNull();
         assertThat(songList.size()).isEqualTo(2);
+    }
+
+    @Test
+    void getSong() {
+        Song song6 = new Song() {{
+            setId(6L);
+            setName("song6");
+            setYear(1990);
+        }};
+
+        Long id = song6.getId();
+
+        when(songRepository.getReferenceById(id)).thenReturn(song6);
+        songService.fetchSong(id);
+
+        verify(songRepository).getReferenceById(id);
     }
 }
