@@ -3,7 +3,7 @@ FROM maven:3.9.6-eclipse-temurin-21 AS builder
 
 WORKDIR /build_dir
 COPY . .
-RUN mvn clean package -DskipTests
+RUN mvn clean package
 
 # Stage 2: Create minimal runtime image
 FROM gcr.io/distroless/java21:nonroot
