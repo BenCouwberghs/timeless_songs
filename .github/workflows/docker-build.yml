@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - dev_v1
-      - feature_27
+      - feature_31
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
