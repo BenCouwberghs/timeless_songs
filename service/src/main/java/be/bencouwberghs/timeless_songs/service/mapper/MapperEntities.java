@@ -12,7 +12,7 @@ public class MapperEntities {
         return BandDto.builder()
                 .id(band.getId())
                 .name(band.getName())
-                .wikiLinkPage(band.getLinkWikiPage())
+                .linkWikiPage(band.getLinkWikiPage())
                 .build();
     }
 
@@ -20,7 +20,7 @@ public class MapperEntities {
         return Band.builder()
                 .id(bandDto.getId())
                 .name(bandDto.getName())
-                .linkWikiPage(bandDto.getWikiLinkPage())
+                .linkWikiPage(bandDto.getLinkWikiPage())
                 .build();
     }
 
