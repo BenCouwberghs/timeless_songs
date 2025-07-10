@@ -23,7 +23,7 @@ class MapperEntitiesTest {
         BandDto expected = BandDto.builder()
                 .id(1L)
                 .name("band 1")
-                .wikiLinkPage("testLink 1")
+                .linkWikiPage("testLink 1")
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandEntityToDto(band));
@@ -40,7 +40,7 @@ class MapperEntitiesTest {
         BandDto bandDto = BandDto.builder()
                 .id(2L)
                 .name("band 2")
-                .wikiLinkPage("testLink 2")
+                .linkWikiPage("testLink 2")
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandDtoToBandEntity(bandDto));

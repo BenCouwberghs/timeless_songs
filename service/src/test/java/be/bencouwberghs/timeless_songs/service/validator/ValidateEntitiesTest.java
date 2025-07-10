@@ -24,7 +24,7 @@ class ValidateEntitiesTest {
     void validateBandPass() {
         BandDto bandDto = BandDto.builder()
                 .name("band 2")
-                .wikiLinkPage("testLink 2")
+                .linkWikiPage("testLink 2")
                 .build();
 
         assertDoesNotThrow(() -> validateEntities.validateBand(bandDto));
