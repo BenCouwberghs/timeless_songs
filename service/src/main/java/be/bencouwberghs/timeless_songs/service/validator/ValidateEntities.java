@@ -9,7 +9,7 @@ import org.springframework.validation.ValidationUtils;
 @Service
 public class ValidateEntities {
     public void validateBand(BandDto bandDto) throws UserInputException  {
-        if ( bandDto.getName() == null || bandDto.getWikiLinkPage() == null) {
+        if ( bandDto.getName() == null || bandDto.getLinkWikiPage() == null) {
             throw new UserInputException("Please fill in all needed properties");
         }
     }

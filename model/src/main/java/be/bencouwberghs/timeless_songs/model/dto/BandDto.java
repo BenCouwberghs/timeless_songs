@@ -8,5 +8,5 @@ import lombok.Data;
 public class BandDto {
     private Long id;
     private String name;
-    private String wikiLinkPage;
+    private String linkWikiPage;
 }
