@@ -13,7 +13,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:4200",
                         "http://localhost",
-                        "http://times-less-songs-app:8080"
+                        "http://times-less-songs-app:8080",
+                        "https://dev-v1.timeless-songs.feco.be"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
