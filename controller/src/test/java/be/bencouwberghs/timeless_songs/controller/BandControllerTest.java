@@ -36,7 +36,7 @@ class BandControllerTest {
     void addBand() throws UserInputException {
         BandDto bandDto = BandDto.builder()
                 .name("band 1")
-                .wikiLinkPage("testLink 1")
+                .linkWikiPage("testLink 1")
                 .build();
 
         Band band = new Band() {{
@@ -56,7 +56,7 @@ class BandControllerTest {
     void modifyBand() throws UserInputException {
         BandDto bandDto2 = BandDto.builder()
                 .name("band 2")
-                .wikiLinkPage("testLink 2")
+                .linkWikiPage("testLink 2")
                 .build();
 
         Band band2 = new Band() {{
