@@ -63,8 +63,8 @@ public class BandController {
     }
 
     @GetMapping("/bands/{id}")
-    public Band getBand(@PathVariable Long id) {
-        return bandService.fetchBand(id);
+    public BandDto getBand(@PathVariable Long id) {
+        return mapperEntities.mapBandEntityToDto(bandService.fetchBand(id));
     }
 
 }
