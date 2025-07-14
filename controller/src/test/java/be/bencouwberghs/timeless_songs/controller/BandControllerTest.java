@@ -120,6 +120,7 @@ class BandControllerTest {
         when(bandService.fetchBand(id)).thenReturn(band6);
         bandController.getBand(id);
 
+        verify(mapperEntities).mapBandEntityToDto(band6);
         verify(bandService).fetchBand(id);
     }
 }
