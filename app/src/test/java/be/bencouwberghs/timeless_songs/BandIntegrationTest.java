@@ -51,6 +51,9 @@ public class BandIntegrationTest {
         bandService.addBand(band4);
 
         band4.setName("Beatles");
+
+        entityManager.clear();
+
         bandService.modifyBand(band4);
 
         assertEquals(band4, bandService.findBandByName("Beatles"));

@@ -65,7 +65,7 @@ class BandServiceImplTest {
             setLinkWikiPage("Testlink4");
         }};
 
-        when(bandRepository.findByName(band4.getName())).thenReturn(band4);
+        when(bandRepository.existsByNameAndIdNot(band4.getName(), band4.getId())).thenReturn(false);
 
         bandService.modifyBand(band4);
 

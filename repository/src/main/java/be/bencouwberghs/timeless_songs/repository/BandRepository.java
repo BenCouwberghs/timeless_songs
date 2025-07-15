@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BandRepository extends JpaRepository<Band, Long> {
     boolean existsByName(String name);
+    boolean existsByNameAndIdNot(String name, Long id);
 
     Band findByName(String name);
 }
