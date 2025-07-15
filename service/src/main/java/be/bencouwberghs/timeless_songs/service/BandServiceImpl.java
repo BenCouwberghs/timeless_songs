@@ -26,7 +26,7 @@ public class BandServiceImpl implements BandService {
 
 
     public void modifyBand(Band band) {
-        if (!Objects.equals(bandRepository.findByName(band.getName()).getId(), band.getId())) {
+        if (bandRepository.existsByNameAndIdNot(band.getName(), band.getId())) {
             throw new EntityExistsException("Changed band name is already taken: " + band.getName());
         }
         bandRepository.save(band);
