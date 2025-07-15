@@ -16,7 +16,7 @@ public class CorsConfig implements WebMvcConfigurer {
                         "http://times-less-songs-app:8080",
                         "https://dev-v1.timeless-songs.feco.be"
                 )
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
