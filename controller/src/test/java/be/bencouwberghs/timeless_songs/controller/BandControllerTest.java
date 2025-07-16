@@ -55,19 +55,22 @@ class BandControllerTest {
     @Test
     void modifyBand() throws UserInputException {
         BandDto bandDto2 = BandDto.builder()
+                .id(2L)
                 .name("band 2")
                 .linkWikiPage("testLink 2")
                 .build();
 
         Band band2 = new Band() {{
-            setName("band 2");
-            setLinkWikiPage("testLink 2");
+            setId(2L);
+            setName("band 7");
+            setLinkWikiPage("testLink 7");
         }};
 
         doNothing().when(validateEntities).validateBand(bandDto2);
-        when(mapperEntities.mapBandDtoToBandEntity(bandDto2)).thenReturn(band2);
+        when(bandService.fetchBand(band2.getId())).thenReturn(band2);
+        when(mapperEntities.updateBandEntityFromDto(band2, bandDto2)).thenReturn(band2);
 
-        bandController.modifyBand(bandDto2);
+        bandController.modifyBand(bandDto2, band2.getId());
 
         verify(bandService).modifyBand(band2);
     }
