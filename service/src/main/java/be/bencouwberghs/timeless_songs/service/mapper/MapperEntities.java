@@ -24,6 +24,13 @@ public class MapperEntities {
                 .build();
     }
 
+    public Band updateBandEntityFromDto(Band band, BandDto bandDto) {
+        band.setName(bandDto.getName());
+        band.setLinkWikiPage(bandDto.getLinkWikiPage());
+
+        return band;
+    }
+
     public SongDto mapSongEntityToDto(Song song) {
         return SongDto.builder()
                 .id(song.getId())
