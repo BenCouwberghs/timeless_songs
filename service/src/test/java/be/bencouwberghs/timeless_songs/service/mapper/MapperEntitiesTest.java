@@ -47,6 +47,30 @@ class MapperEntitiesTest {
     }
 
     @Test
+    void updateBandEntityFromDto() {
+        Band expected = new Band() {{
+            setId(3L);
+            setName("band 3");
+            setLinkWikiPage("testLink 3");
+        }};
+
+        BandDto bandDto = BandDto.builder()
+                .id(3L)
+                .name("band 3")
+                .linkWikiPage("testLink 3")
+                .build();
+
+
+        Band band = new Band() {{
+            setId(3L);
+            setName("band 1");
+            setLinkWikiPage("testLink 1");
+        }};
+
+        assertEquals(expected, mapperEntities.updateBandEntityFromDto(band, bandDto));
+    }
+
+    @Test
     void mapSongEntityToDto() {
         Song song = new Song() {{
             setId(1L);
