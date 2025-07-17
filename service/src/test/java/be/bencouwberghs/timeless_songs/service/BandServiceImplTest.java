@@ -37,7 +37,7 @@ class BandServiceImplTest {
             setLinkWikiPage("Testlink2");
         }};
 
-        when(bandRepository.findAll()).thenReturn(List.of(band1, band2));
+        when(bandRepository.findAllByOrderByNameAsc()).thenReturn(List.of(band1, band2));
         var bandList = bandService.fetchAllBands();
 
         assertThat(bandList).isNotNull();
