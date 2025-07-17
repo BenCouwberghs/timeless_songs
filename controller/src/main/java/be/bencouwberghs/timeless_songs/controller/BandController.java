@@ -34,12 +34,13 @@ public class BandController {
         }
     }
 
-    @PatchMapping("/bands")
-    public ResponseEntity<String> modifyBand(@RequestBody BandDto bandDto) {
+    @PatchMapping("/bands/{id}")
+    public ResponseEntity<String> modifyBand(@RequestBody BandDto bandDto, @PathVariable Long id) {
         try {
             validateEntities.validateBand(bandDto);
-            Band newBand = mapperEntities.mapBandDtoToBandEntity(bandDto);
-            bandService.modifyBand(newBand);
+            Band band = bandService.fetchBand(id);
+            band = mapperEntities.updateBandEntityFromDto(band, bandDto);
+            bandService.modifyBand(band);
             return ResponseEntity.ok("Successfully updated band.");
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());
