@@ -126,4 +126,25 @@ class BandControllerTest {
         verify(mapperEntities).mapBandEntityToDto(band6);
         verify(bandService).fetchBand(id);
     }
+
+    @Test
+    void search() {
+        Band band7 = new Band() {{
+            setName("Beatles");
+            setLinkWikiPage("testLink 7");
+        }};
+
+        Band band8 = new Band() {{
+            setName("Sabaton");
+            setLinkWikiPage("testLink 8");
+        }};
+
+        String searchString = "Beatles";
+
+        when(bandService.fetchAllBands()).thenReturn(List.of(band7, band8));
+        var bandList = bandController.search(searchString);
+
+        assertThat(bandList).isNotNull();
+        assertThat(bandList.size()).isEqualTo(1);
+    }
 }

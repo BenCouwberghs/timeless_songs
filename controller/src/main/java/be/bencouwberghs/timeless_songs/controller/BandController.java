@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -66,6 +67,21 @@ public class BandController {
     @GetMapping("/bands/{id}")
     public BandDto getBand(@PathVariable Long id) {
         return mapperEntities.mapBandEntityToDto(bandService.fetchBand(id));
+    }
+
+
+    @GetMapping("/bands/search/{searchString}")
+    public List<Band> search(@PathVariable String searchString) {
+        List<Band> bands = bandService.fetchAllBands();
+        List<Band> results = new ArrayList<>();
+
+        for(Band band : bands) {
+            if (band.getName().contains(searchString)) {
+                results.add(band);
+            }
+        }
+
+        return results;
     }
 
 }

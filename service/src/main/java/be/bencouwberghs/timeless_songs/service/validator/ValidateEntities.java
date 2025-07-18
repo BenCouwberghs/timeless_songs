@@ -4,7 +4,6 @@ import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.ValidationUtils;
 
 @Service
 public class ValidateEntities {
