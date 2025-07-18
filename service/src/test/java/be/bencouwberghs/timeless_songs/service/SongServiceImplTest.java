@@ -44,7 +44,7 @@ public class SongServiceImplTest {
             setYear(1990);
         }};
 
-        when(songRepository.findByName(song2.getName())).thenReturn(song2);
+        when(songRepository.existsByNameAndIdDiff(song2.getName(), song2.getId())).thenReturn(false);
 
         songService.modifySong(song2);
         verify(songRepository).save(song2);
