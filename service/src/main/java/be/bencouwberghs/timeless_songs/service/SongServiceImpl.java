@@ -24,7 +24,7 @@ public class SongServiceImpl implements SongService {
     }
 
     public void modifySong(Song song) {
-        if (songRepository.existsByNameAndIdDiff(song.getName(), song.getId())) {
+        if (songRepository.existsByNameAndIdNot(song.getName(), song.getId())) {
             throw new EntityExistsException("Changed song name is already taken: " + song.getName());
         }
         songRepository.save(song);
