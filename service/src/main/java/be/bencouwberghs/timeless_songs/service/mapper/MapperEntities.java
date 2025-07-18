@@ -50,4 +50,13 @@ public class MapperEntities {
                 .linkWikiPage(songDto.getWikiLinkPage())
                 .build();
     }
+
+    public Song updateSongEntityFromDto(Song song, SongDto songDto) {
+        song.setName(songDto.getName());
+        song.setBand(songDto.getBand());
+        song.setYear(songDto.getYear());
+        song.setLinkWikiPage(songDto.getWikiLinkPage());
+
+        return song;
+    }
 }
