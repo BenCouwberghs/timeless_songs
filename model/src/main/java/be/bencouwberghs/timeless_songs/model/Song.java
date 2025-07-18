@@ -3,8 +3,6 @@ package be.bencouwberghs.timeless_songs.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
