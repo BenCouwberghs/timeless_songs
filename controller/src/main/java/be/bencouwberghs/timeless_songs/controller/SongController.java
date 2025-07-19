@@ -33,12 +33,13 @@ public class SongController {
         }
     }
 
-    @PatchMapping("/songs")
-    public ResponseEntity<String> modifySong(@RequestBody SongDto songDto) {
+    @PatchMapping("/songs/{id}")
+    public ResponseEntity<String> modifySong(@RequestBody SongDto songDto, @PathVariable Long id) {
         try {
             validateEntities.validateSong(songDto);
-            Song newSong = mapperEntities.mapSongDtoToSongEntity(songDto);
-            songService.modifySong(newSong);
+            Song song = songService.fetchSong(id);
+            song = mapperEntities.updateSongEntityFromDto(song, songDto);
+            songService.modifySong(song);
             return ResponseEntity.ok("Successfully updated song.");
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());

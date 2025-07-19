@@ -7,7 +7,6 @@ import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -25,7 +24,7 @@ public class SongServiceImpl implements SongService {
     }
 
     public void modifySong(Song song) {
-        if (!Objects.equals(songRepository.findByName(song.getName()).getId(), song.getId())) {
+        if (songRepository.existsByNameAndIdNot(song.getName(), song.getId())) {
             throw new EntityExistsException("Changed song name is already taken: " + song.getName());
         }
         songRepository.save(song);

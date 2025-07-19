@@ -57,21 +57,24 @@ class SongControllerTest {
     @Test
     void modifySong() throws UserInputException {
         SongDto songDto2 = SongDto.builder()
+                .id(2L)
                 .name("song 2")
                 .year(1995)
                 .wikiLinkPage("testLink 2")
                 .build();
 
         Song song2 = new Song() {{
-            setName("song 2");
+            setId(2L);
+            setName("song 5");
             setYear(1995);
-            setLinkWikiPage("testLink 2");
+            setLinkWikiPage("testLink 7");
         }};
 
         doNothing().when(validateEntities).validateSong(songDto2);
-        when(mapperEntities.mapSongDtoToSongEntity(songDto2)).thenReturn(song2);
+        when(songService.fetchSong(song2.getId())).thenReturn(song2);
+        when(mapperEntities.updateSongEntityFromDto(song2, songDto2)).thenReturn(song2);
 
-        songController.modifySong(songDto2);
+        songController.modifySong(songDto2, song2.getId());
 
         verify(songService).modifySong(song2);
     }
