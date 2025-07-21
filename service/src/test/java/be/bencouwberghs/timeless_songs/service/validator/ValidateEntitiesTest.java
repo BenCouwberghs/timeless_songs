@@ -31,6 +31,16 @@ class ValidateEntitiesTest {
     }
 
     @Test
+    void validateBandFailNotNUll() {
+        BandDto bandDto = BandDto.builder()
+                .name("")
+                .linkWikiPage("")
+                .build();
+
+        assertThrows(UserInputException.class, () -> validateEntities.validateBand(bandDto));
+    }
+
+    @Test
     void validateSongFail() {
         SongDto songDto = SongDto.builder()
                 .year(1990)
