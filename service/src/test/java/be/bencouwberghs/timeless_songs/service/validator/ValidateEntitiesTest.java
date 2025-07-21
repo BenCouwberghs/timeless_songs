@@ -31,7 +31,7 @@ class ValidateEntitiesTest {
     }
 
     @Test
-    void validateBandFailNotNUll() {
+    void validateBandFailEmpty() {
         BandDto bandDto = BandDto.builder()
                 .name("")
                 .linkWikiPage("")
