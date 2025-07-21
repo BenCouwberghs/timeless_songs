@@ -122,4 +122,24 @@ public class BandIntegrationTest {
 
         assertEquals(band, bandService.fetchBand(band.getId()));
     }
+
+    @Test
+    void search() {
+        Band band6 = new Band();
+
+        band6.setName("band 6");
+        band6.setLinkWikiPage("testlink6");
+
+        Band band7 = new Band();
+
+        band7.setName("band 7");
+        band7.setLinkWikiPage("testlink7");
+
+        bandService.addBand(band6);
+        bandService.addBand(band7);
+
+        String keyword = "7";
+
+        assertEquals(1, bandService.search(keyword).size());
+    }
 }
