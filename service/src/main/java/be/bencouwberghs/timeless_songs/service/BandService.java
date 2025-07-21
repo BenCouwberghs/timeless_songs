@@ -11,4 +11,5 @@ public interface BandService {
     Band fetchBand(Long id);
     List<Band> fetchAllBands();
     Band findBandByName(String name);
+    List<Band> search(String keyword);
 }

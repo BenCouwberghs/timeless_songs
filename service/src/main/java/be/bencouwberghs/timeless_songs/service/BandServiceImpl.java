@@ -51,4 +51,8 @@ public class BandServiceImpl implements BandService {
     public Band findBandByName(String name) {
         return bandRepository.findByName(name);
     }
+
+    public List<Band> search(String keyword) {
+        return bandRepository.findByNameContainingIgnoreCase(keyword);
+    }
 }

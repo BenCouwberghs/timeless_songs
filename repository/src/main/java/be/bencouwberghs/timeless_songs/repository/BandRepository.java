@@ -12,5 +12,6 @@ public interface BandRepository extends JpaRepository<Band, Long> {
     boolean existsByNameAndIdNot(String name, Long id);
 
     Band findByName(String name);
+    List<Band> findByNameContainingIgnoreCase(String keyword);
     List<Band> findAllByOrderByNameAsc();
 }

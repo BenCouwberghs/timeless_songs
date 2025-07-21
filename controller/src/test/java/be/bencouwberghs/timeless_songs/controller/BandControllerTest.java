@@ -141,7 +141,7 @@ class BandControllerTest {
 
         String searchString = "Beatles";
 
-        when(bandService.fetchAllBands()).thenReturn(List.of(band7, band8));
+        when(bandService.search(searchString)).thenReturn(List.of(band7));
         var bandList = bandController.search(searchString);
 
         assertThat(bandList).isNotNull();

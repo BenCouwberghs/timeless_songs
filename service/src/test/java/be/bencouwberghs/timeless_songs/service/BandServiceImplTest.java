@@ -115,4 +115,26 @@ class BandServiceImplTest {
 
         verify(bandRepository).getReferenceById(id);
     }
+
+    @Test
+    void search() {
+        Band band6 = new Band() {{
+            setId(6L);
+            setName("band 6");
+            setLinkWikiPage("Testlink6");
+        }};
+
+        Band band7 = new Band() {{
+            setId(7L);
+            setName("band 7");
+            setLinkWikiPage("Testlink7");
+        }};
+
+        String keyword = "7";
+
+        when(bandRepository.findByNameContainingIgnoreCase(keyword)).thenReturn(List.of(band7));
+        bandService.search(keyword);
+
+        verify(bandRepository).findByNameContainingIgnoreCase(keyword);
+    }
 }
