@@ -72,16 +72,7 @@ public class BandController {
 
     @GetMapping("/bands/search/{searchString}")
     public List<Band> search(@PathVariable String searchString) {
-        List<Band> bands = bandService.fetchAllBands();
-        List<Band> results = new ArrayList<>();
-
-        for(Band band : bands) {
-            if (band.getName().contains(searchString)) {
-                results.add(band);
-            }
-        }
-
-        return results;
+        return bandService.search(searchString);
     }
 
 }
