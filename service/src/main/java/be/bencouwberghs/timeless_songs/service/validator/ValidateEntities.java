@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidateEntities {
     public void validateBand(BandDto bandDto) throws UserInputException  {
-        if ( bandDto.getName() == null || bandDto.getLinkWikiPage() == null) {
+        if ( bandDto.getName() == null || bandDto.getName().isEmpty()) {
             throw new UserInputException("Please fill in all needed properties");
         }
     }
 
     public void validateSong(SongDto songDto) throws UserInputException {
-        if (songDto.getName() == null) {
+        if (songDto.getName() == null || songDto.getName().isEmpty()) {
             throw new UserInputException("Please fill in all needed properties");
         }
     }

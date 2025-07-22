@@ -14,7 +14,7 @@ class ValidateEntitiesTest {
     @Test
     void validateBandFail() {
         BandDto bandDto = BandDto.builder()
-                .name("band 1")
+                .linkWikiPage("testLink 1")
                 .build();
 
         assertThrows(UserInputException.class, () -> validateEntities.validateBand(bandDto));
@@ -28,6 +28,16 @@ class ValidateEntitiesTest {
                 .build();
 
         assertDoesNotThrow(() -> validateEntities.validateBand(bandDto));
+    }
+
+    @Test
+    void validateBandFailEmpty() {
+        BandDto bandDto = BandDto.builder()
+                .name("")
+                .linkWikiPage("")
+                .build();
+
+        assertThrows(UserInputException.class, () -> validateEntities.validateBand(bandDto));
     }
 
     @Test
