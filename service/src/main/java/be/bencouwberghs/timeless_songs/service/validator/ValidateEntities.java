@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidateEntities {
     public void validateBand(BandDto bandDto) throws UserInputException  {
-        if ( bandDto.getName() == null || bandDto.getName().isEmpty() || bandDto.getLinkWikiPage() == null ||
-                bandDto.getLinkWikiPage().isEmpty() ) {
+        if ( bandDto.getName() == null || bandDto.getName().isEmpty()) {
             throw new UserInputException("Please fill in all needed properties");
         }
     }
