@@ -4,7 +4,7 @@
     <parent>
         <groupId>be.bencouwberghs</groupId>
         <artifactId>timeless_songs</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>app</artifactId>
     <name>Archetype - app</name>
@@ -13,17 +13,17 @@
         <dependency>
             <groupId>be.bencouwberghs</groupId>
             <artifactId>repository</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>be.bencouwberghs</groupId>
             <artifactId>service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>be.bencouwberghs</groupId>
             <artifactId>controller</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

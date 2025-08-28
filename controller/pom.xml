@@ -4,7 +4,7 @@
     <parent>
         <groupId>be.bencouwberghs</groupId>
         <artifactId>timeless_songs</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>controller</artifactId>
     <name>Archetype - controller</name>
@@ -13,7 +13,7 @@
         <dependency>
             <groupId>be.bencouwberghs</groupId>
             <artifactId>service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
