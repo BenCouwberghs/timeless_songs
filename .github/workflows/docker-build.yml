@@ -1,9 +1,10 @@
 name: Build and Push Docker Image
 on:
   push:
-    branches:
-      - dev_v1,
-      - release_v1
+    branches: [
+        dev_v1,
+        release_v1
+    ]
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
