@@ -1,0 +1,21 @@
+package be.bencouwberghs.timeless_songs.service.validator;
+
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
+import be.bencouwberghs.timeless_songs.model.dto.SongDto;
+import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ValidateEntities {
+    public void validateBand(BandDto bandDto) throws UserInputException  {
+        if ( bandDto.getName() == null || bandDto.getName().isEmpty()) {
+            throw new UserInputException("Please fill in all needed properties");
+        }
+    }
+
+    public void validateSong(SongDto songDto) throws UserInputException {
+        if (songDto.getName() == null || songDto.getName().isEmpty()) {
+            throw new UserInputException("Please fill in all needed properties");
+        }
+    }
+}
