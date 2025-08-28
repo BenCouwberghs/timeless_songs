@@ -14,7 +14,8 @@ public class CorsConfig implements WebMvcConfigurer {
                         "http://localhost:4200",
                         "http://localhost",
                         "http://times-less-songs-app:8080",
-                        "https://dev-v1.timeless-songs.feco.be"
+                        "https://v1.timeless-songs.feco.be",
+                        "https://timeless-songs.feco.be"
                 )
                 .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
