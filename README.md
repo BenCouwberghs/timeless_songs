@@ -16,3 +16,5 @@ but this project has already seen great improvements for me with this.
 [Timeless Songs](https://dev-v1.timeless-songs.feco.be)
 
 [Front end repository](https://github.com/BenCouwberghs/timeless_songs_frontend)
+
+[LinkedIn profile](https://www.linkedin.com/in/ben-couwberghs/)
