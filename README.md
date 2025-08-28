@@ -13,7 +13,9 @@ and be able to showcase such a project as part of my portfolio.
 Next is working on improving my skills with VCS and specifically GitHub as I am somewhat lacking in this field,
 but this project has already seen great improvements for me with this.
 ## Useful links
-[Timeless Songs](https://dev-v1.timeless-songs.feco.be)
+[Timeless Songs - v1](https://v1.timeless-songs.feco.be)
+
+[Timeless Songs - latest version](https://timeless-songs.feco.be)
 
 [Front end repository](https://github.com/BenCouwberghs/timeless_songs_frontend)
 
