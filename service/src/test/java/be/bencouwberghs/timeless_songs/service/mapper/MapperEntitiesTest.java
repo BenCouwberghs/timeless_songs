@@ -18,12 +18,14 @@ class MapperEntitiesTest {
             setId(1L);
             setName("band 1");
             setLinkWikiPage("testLink 1");
+            setComments("testComments 1");
         }};
 
         BandDto expected = BandDto.builder()
                 .id(1L)
                 .name("band 1")
                 .linkWikiPage("testLink 1")
+                .comments("testComments 1")
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandEntityToDto(band));
@@ -35,12 +37,14 @@ class MapperEntitiesTest {
             setId(2L);
             setName("band 2");
             setLinkWikiPage("testLink 2");
+            setComments("testComments 2");
         }};
 
         BandDto bandDto = BandDto.builder()
                 .id(2L)
                 .name("band 2")
                 .linkWikiPage("testLink 2")
+                .comments("testComments 2")
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandDtoToBandEntity(bandDto));
@@ -52,12 +56,14 @@ class MapperEntitiesTest {
             setId(3L);
             setName("band 3");
             setLinkWikiPage("testLink 3");
+            setComments("testComments 3");
         }};
 
         BandDto bandDto = BandDto.builder()
                 .id(3L)
                 .name("band 3")
                 .linkWikiPage("testLink 3")
+                .comments("testComments 3")
                 .build();
 
 
@@ -65,6 +71,7 @@ class MapperEntitiesTest {
             setId(3L);
             setName("band 1");
             setLinkWikiPage("testLink 1");
+            setComments("testComments 1");
         }};
 
         assertEquals(expected, mapperEntities.updateBandEntityFromDto(band, bandDto));
