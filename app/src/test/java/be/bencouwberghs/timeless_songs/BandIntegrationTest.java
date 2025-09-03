@@ -34,7 +34,8 @@ public class BandIntegrationTest {
         Band band3 = new Band();
 
         band3.setName("band 3");
-        band3.setLinkWikiPage("testlink3");
+        band3.setLinkWikiPage("testLink3");
+        band3.setComments("testComments 3");
 
         bandService.addBand(band3);
 
@@ -46,7 +47,8 @@ public class BandIntegrationTest {
         Band band4 = new Band();
 
         band4.setName("band 4");
-        band4.setLinkWikiPage("testlink4");
+        band4.setLinkWikiPage("testLink4");
+        band4.setComments("testComments 4");
 
         bandService.addBand(band4);
 
@@ -64,7 +66,8 @@ public class BandIntegrationTest {
         Band band5 = new Band();
 
         band5.setName("band 5");
-        band5.setLinkWikiPage("testlink5");
+        band5.setLinkWikiPage("testLink5");
+        band5.setComments("testComments 5");
 
         bandService.addBand(band5);
         bandService.deleteBandById(band5.getId());
@@ -77,12 +80,14 @@ public class BandIntegrationTest {
         Band band1 = new Band();
 
         band1.setName("band 1");
-        band1.setLinkWikiPage("testlink1");
+        band1.setLinkWikiPage("testLink1");
+        band1.setComments("testComments 1");
 
         Band band2 = new Band();
 
         band2.setName("band 2");
-        band2.setLinkWikiPage("testlink2");
+        band2.setLinkWikiPage("testLink2");
+        band2.setComments("testComments 2");
 
         bandService.addBand(band1);
         bandService.addBand(band2);
@@ -95,7 +100,8 @@ public class BandIntegrationTest {
         Band band = new Band();
 
         band.setName("band 1");
-        band.setLinkWikiPage("testlink1");
+        band.setLinkWikiPage("testLink1");
+        band.setComments("testComments 1");
 
         bandService.addBand(band);
 
@@ -115,7 +121,8 @@ public class BandIntegrationTest {
         Band band = new Band();
 
         band.setName("band 1");
-        band.setLinkWikiPage("testlink1");
+        band.setLinkWikiPage("testLink1");
+        band.setComments("testComments 1");
 
         bandService.addBand(band);
         band = bandService.findBandByName("band 1");
@@ -128,12 +135,14 @@ public class BandIntegrationTest {
         Band band6 = new Band();
 
         band6.setName("band 6");
-        band6.setLinkWikiPage("testlink6");
+        band6.setLinkWikiPage("testLink6");
+        band6.setComments("testComments 6");
 
         Band band7 = new Band();
 
         band7.setName("band 7");
-        band7.setLinkWikiPage("testlink7");
+        band7.setLinkWikiPage("testLink7");
+        band7.setComments("testComments 7");
 
         bandService.addBand(band6);
         bandService.addBand(band7);

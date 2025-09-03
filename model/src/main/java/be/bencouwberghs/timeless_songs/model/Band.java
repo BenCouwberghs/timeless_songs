@@ -19,4 +19,8 @@ public class Band extends AuditableEntity {
 
     @Column(nullable = true)
     private String linkWikiPage;
+
+    @Column(nullable = true, length = 1024)
+    private String comments;
+
 }
