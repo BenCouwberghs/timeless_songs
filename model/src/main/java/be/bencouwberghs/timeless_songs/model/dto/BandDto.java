@@ -9,4 +9,5 @@ public class BandDto {
     private Long id;
     private String name;
     private String linkWikiPage;
+    private String comments;
 }
