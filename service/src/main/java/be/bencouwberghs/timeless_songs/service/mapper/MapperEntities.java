@@ -29,7 +29,7 @@ public class MapperEntities {
     public Band updateBandEntityFromDto(Band band, BandDto bandDto) {
         band.setName(bandDto.getName());
         band.setLinkWikiPage(bandDto.getLinkWikiPage());
-        band.setComments(band.getComments());
+        band.setComments(bandDto.getComments());
 
         return band;
     }
