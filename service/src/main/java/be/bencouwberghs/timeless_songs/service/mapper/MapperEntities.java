@@ -13,6 +13,7 @@ public class MapperEntities {
                 .id(band.getId())
                 .name(band.getName())
                 .linkWikiPage(band.getLinkWikiPage())
+                .comments(band.getComments())
                 .build();
     }
 
@@ -21,12 +22,14 @@ public class MapperEntities {
                 .id(bandDto.getId())
                 .name(bandDto.getName())
                 .linkWikiPage(bandDto.getLinkWikiPage())
+                .comments(bandDto.getComments())
                 .build();
     }
 
     public Band updateBandEntityFromDto(Band band, BandDto bandDto) {
         band.setName(bandDto.getName());
         band.setLinkWikiPage(bandDto.getLinkWikiPage());
+        band.setComments(band.getComments());
 
         return band;
     }
