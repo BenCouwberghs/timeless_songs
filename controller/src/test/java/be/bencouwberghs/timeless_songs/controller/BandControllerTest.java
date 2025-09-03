@@ -37,11 +37,13 @@ class BandControllerTest {
         BandDto bandDto = BandDto.builder()
                 .name("band 1")
                 .linkWikiPage("testLink 1")
+                .comments("testComments 1")
                 .build();
 
         Band band = new Band() {{
             setName("band 1");
             setLinkWikiPage("testLink 1");
+            setComments("testComments 1");
         }};
 
         doNothing().when(validateEntities).validateBand(bandDto);
@@ -58,12 +60,14 @@ class BandControllerTest {
                 .id(2L)
                 .name("band 2")
                 .linkWikiPage("testLink 2")
+                .comments("testComments 2")
                 .build();
 
         Band band2 = new Band() {{
             setId(2L);
             setName("band 7");
             setLinkWikiPage("testLink 7");
+            setComments("testComments 7");
         }};
 
         doNothing().when(validateEntities).validateBand(bandDto2);
@@ -81,6 +85,7 @@ class BandControllerTest {
             setId(3L);
             setName("band 3");
             setLinkWikiPage("testLink 3");
+            setComments("testComments 3");
         }};
 
         Long id = 3L;
@@ -96,11 +101,13 @@ class BandControllerTest {
         Band band4 = new Band() {{
             setName("band 4");
             setLinkWikiPage("testLink 4");
+            setComments("testComments 4");
         }};
 
         Band band5 = new Band() {{
             setName("band 5");
             setLinkWikiPage("testLink 5");
+            setComments("testComments 5");
         }};
 
         when(bandService.fetchAllBands()).thenReturn(List.of(band4, band5));
@@ -116,6 +123,7 @@ class BandControllerTest {
             setId(6L);
             setName("band 6");
             setLinkWikiPage("testLink 6");
+            setComments("testComments 6");
         }};
 
         Long id = 6L;
@@ -132,11 +140,13 @@ class BandControllerTest {
         Band band7 = new Band() {{
             setName("Beatles");
             setLinkWikiPage("testLink 7");
+            setComments("testComments 7");
         }};
 
         Band band8 = new Band() {{
             setName("Sabaton");
             setLinkWikiPage("testLink 8");
+            setComments("testComments 8");
         }};
 
         String searchString = "Beatles";
