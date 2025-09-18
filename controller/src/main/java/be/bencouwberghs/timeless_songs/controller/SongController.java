@@ -63,7 +63,7 @@ public class SongController {
     }
 
     @GetMapping("/songs/{id}")
-    public Song getSong(@PathVariable Long id) {
-        return songService.fetchSong(id);
+    public SongDto getSong(@PathVariable Long id) {
+        return mapperEntities.mapSongEntityToDto(songService.fetchSong(id));
     }
 }
