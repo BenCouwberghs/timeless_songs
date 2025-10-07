@@ -5,6 +5,7 @@ import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class BandServiceImpl implements BandService {
     }
 
 
-    public void addBand(Band band) {
+    public void addBand(BandDto bandDto) {
+        Band band = mapperEntities.mapBandDtoToBandEntity(bandDto);
         if (bandRepository.existsByName(band.getName())) {
             throw new EntityExistsException("Band name taken: " + band.getName());
         }
@@ -28,7 +30,8 @@ public class BandServiceImpl implements BandService {
     }
 
 
-    public void modifyBand(Band band) {
+    public void modifyBand(BandDto bandDto) {
+        Band band = mapperEntities.mapBandDtoToBandEntity(bandDto);
         if (bandRepository.existsByNameAndIdNot(band.getName(), band.getId())) {
             throw new EntityExistsException("Changed band name is already taken: " + band.getName());
         }
@@ -39,7 +42,10 @@ public class BandServiceImpl implements BandService {
 
 
     public void deleteBandById(Long id) {
-        bandRepository.delete(mapperEntities.mapBandDtoToBandEntity(fetchBand(id)));
+        Band band = bandRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+                "Band not found with id: " + id));
+
+        bandRepository.delete(band);
     }
 
     public BandDto fetchBand(Long id) {

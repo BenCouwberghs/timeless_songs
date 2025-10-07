@@ -6,8 +6,8 @@ import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import java.util.List;
 
 public interface BandService {
-    void addBand(Band band);
-    void modifyBand(Band band);
+    void addBand(BandDto bandDto);
+    void modifyBand(BandDto bandDto);
     void deleteBandById(Long id);
     BandDto fetchBand(Long id);
     List<BandDto> fetchAllBands();
