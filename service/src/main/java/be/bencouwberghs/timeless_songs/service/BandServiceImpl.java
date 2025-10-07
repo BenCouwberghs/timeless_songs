@@ -1,7 +1,9 @@
 package be.bencouwberghs.timeless_songs.service;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.repository.BandRepository;
+import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,11 @@ import java.util.List;
 @Service
 public class BandServiceImpl implements BandService {
     private final BandRepository bandRepository;
+    private final MapperEntities mapperEntities;
 
-    public BandServiceImpl(BandRepository bandRepository) {
+    public BandServiceImpl(BandRepository bandRepository, MapperEntities mapperEntities) {
         this.bandRepository = bandRepository;
+        this.mapperEntities = mapperEntities;
     }
 
 
@@ -43,8 +47,9 @@ public class BandServiceImpl implements BandService {
     }
 
 
-    public List<Band> fetchAllBands() {
-        return bandRepository.findAllByOrderByNameAsc();
+    public List<BandDto> fetchAllBands() {
+        return mapperEntities.mapBandEntitiesToDtos(
+                bandRepository.findAllByOrderByNameAsc());
     }
 
 
@@ -52,7 +57,8 @@ public class BandServiceImpl implements BandService {
         return bandRepository.findByName(name);
     }
 
-    public List<Band> search(String keyword) {
-        return bandRepository.findByNameContainingIgnoreCase(keyword);
+    public List<BandDto> search(String keyword) {
+        return mapperEntities.mapBandEntitiesToDtos(
+                bandRepository.findByNameContainingIgnoreCase(keyword));
     }
 }
