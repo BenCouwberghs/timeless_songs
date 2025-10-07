@@ -39,11 +39,11 @@ public class BandServiceImpl implements BandService {
 
 
     public void deleteBandById(Long id) {
-        bandRepository.delete(fetchBand(id));
+        bandRepository.delete(mapperEntities.mapBandDtoToBandEntity(fetchBand(id)));
     }
 
-    public Band fetchBand(Long id) {
-        return bandRepository.getReferenceById(id);
+    public BandDto fetchBand(Long id) {
+        return mapperEntities.mapBandEntityToDto(bandRepository.getReferenceById(id));
     }
 
 
