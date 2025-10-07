@@ -6,6 +6,9 @@ import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MapperEntities {
     public BandDto mapBandEntityToDto(Band band) {
@@ -15,6 +18,14 @@ public class MapperEntities {
                 .linkWikiPage(band.getLinkWikiPage())
                 .comments(band.getComments())
                 .build();
+    }
+
+    public List<BandDto> mapBandEntitiesToDtos(List<Band> bands) {
+        List<BandDto> bandDtos = new ArrayList<>();
+        for (Band band : bands) {
+            bandDtos.add(mapBandEntityToDto(band));
+        }
+        return bandDtos;
     }
 
     public Band mapBandDtoToBandEntity(BandDto bandDto) {
