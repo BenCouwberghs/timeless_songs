@@ -23,6 +23,8 @@ public class BandController {
 
     private final ValidateEntities validateEntities;
 
+    //TODO: rework addBand & modifyBand methods.
+
     @PostMapping("/bands")
     public ResponseEntity<String> addBand(@RequestBody BandDto bandDto) {
         try {
@@ -39,7 +41,7 @@ public class BandController {
     public ResponseEntity<String> modifyBand(@RequestBody BandDto bandDto, @PathVariable Long id) {
         try {
             validateEntities.validateBand(bandDto);
-            Band band = bandService.fetchBand(id);
+            Band band = mapperEntities.mapBandDtoToBandEntity(bandService.fetchBand(id));
             band = mapperEntities.updateBandEntityFromDto(band, bandDto);
             bandService.modifyBand(band);
             return ResponseEntity.ok("Successfully updated band.");
@@ -60,18 +62,18 @@ public class BandController {
     }
 
     @GetMapping("/bands")
-    public List<Band> getAllBands() {
+    public List<BandDto> getAllBands() {
         return bandService.fetchAllBands();
     }
 
     @GetMapping("/bands/{id}")
     public BandDto getBand(@PathVariable Long id) {
-        return mapperEntities.mapBandEntityToDto(bandService.fetchBand(id));
+        return bandService.fetchBand(id);
     }
 
 
     @GetMapping("/bands/search/{searchString}")
-    public List<Band> search(@PathVariable String searchString) {
+    public List<BandDto> search(@PathVariable String searchString) {
         return bandService.search(searchString);
     }
 
