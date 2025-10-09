@@ -1,6 +1,5 @@
 package be.bencouwberghs.timeless_songs.controller;
 
-import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
@@ -10,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,18 +17,13 @@ import java.util.List;
 public class BandController {
     private final BandService bandService;
 
-    private final MapperEntities mapperEntities;
-
     private final ValidateEntities validateEntities;
-
-    //TODO: rework addBand & modifyBand methods.
 
     @PostMapping("/bands")
     public ResponseEntity<String> addBand(@RequestBody BandDto bandDto) {
         try {
             validateEntities.validateBand(bandDto);
-            Band newBand = mapperEntities.mapBandDtoToBandEntity(bandDto);
-            bandService.addBand(newBand);
+            bandService.addBand(bandDto);
             return ResponseEntity.ok("Successfully added the band " + bandDto.getName());
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());
@@ -41,9 +34,7 @@ public class BandController {
     public ResponseEntity<String> modifyBand(@RequestBody BandDto bandDto, @PathVariable Long id) {
         try {
             validateEntities.validateBand(bandDto);
-            Band band = mapperEntities.mapBandDtoToBandEntity(bandService.fetchBand(id));
-            band = mapperEntities.updateBandEntityFromDto(band, bandDto);
-            bandService.modifyBand(band);
+            bandService.modifyBand(bandDto);
             return ResponseEntity.ok("Successfully updated band.");
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());
