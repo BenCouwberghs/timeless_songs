@@ -11,6 +11,6 @@ public interface BandService {
     void deleteBandById(Long id);
     BandDto fetchBand(Long id);
     List<BandDto> fetchAllBands();
-    Band findBandByName(String name);
+    BandDto findBandByName(String name);
     List<BandDto> search(String keyword);
 }

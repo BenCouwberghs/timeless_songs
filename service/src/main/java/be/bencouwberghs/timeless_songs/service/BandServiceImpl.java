@@ -59,8 +59,8 @@ public class BandServiceImpl implements BandService {
     }
 
 
-    public Band findBandByName(String name) {
-        return bandRepository.findByName(name);
+    public BandDto findBandByName(String name) {
+        return mapperEntities.mapBandEntityToDto(bandRepository.findByName(name));
     }
 
     public List<BandDto> search(String keyword) {
