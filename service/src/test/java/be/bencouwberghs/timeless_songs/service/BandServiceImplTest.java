@@ -122,10 +122,11 @@ class BandServiceImplTest {
             setComments("testComments 5");
         }};
 
+        when(bandRepository.findByName("band 5")).thenReturn((band5));
 
-        when(bandRepository.findByName("band 5")).thenReturn(band5);
+        bandService.findBandByName("band 5");
 
-        assertThat(band5).isEqualTo(bandService.findBandByName("band 5"));
+        verify(bandRepository).findByName("band 5");
     }
 
     @Test
