@@ -55,6 +55,14 @@ public class MapperEntities {
                 .build();
     }
 
+    public List<SongDto> mapSongEntitiesToDtos(List<Song> songs) {
+        List<SongDto> songDtos = new ArrayList<>();
+        for (Song song : songs) {
+            songDtos.add(mapSongEntityToDto(song));
+        }
+        return songDtos;
+    }
+
     public Song mapSongDtoToSongEntity(SongDto songDto) {
         return Song.builder()
                 .id(songDto.getId())
