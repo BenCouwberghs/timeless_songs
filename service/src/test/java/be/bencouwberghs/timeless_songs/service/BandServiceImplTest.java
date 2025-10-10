@@ -90,11 +90,14 @@ class BandServiceImplTest {
             setComments("testComments 4");
         }};
 
+
+        when(bandRepository.findById(bandDto4.getId())).thenReturn(Optional.of(band4));
         when(bandRepository.existsByNameAndIdNot(band4.getName(), band4.getId())).thenReturn(false);
-        when(mapperEntities.mapBandDtoToBandEntity(bandDto4)).thenReturn(band4);
+        when(mapperEntities.updateBandEntityFromDto(band4, bandDto4)).thenReturn(band4);
 
-        bandService.modifyBand(bandDto4);
+        bandService.modifyBand(bandDto4, band4.getId());
 
+        verify(mapperEntities).updateBandEntityFromDto(band4, bandDto4);
         verify(bandRepository).save(band4);
     }
 

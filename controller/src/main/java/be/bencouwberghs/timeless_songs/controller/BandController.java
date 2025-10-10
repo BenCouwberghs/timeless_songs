@@ -34,7 +34,7 @@ public class BandController {
     public ResponseEntity<String> modifyBand(@RequestBody BandDto bandDto, @PathVariable Long id) {
         try {
             validateEntities.validateBand(bandDto);
-            bandService.modifyBand(bandDto);
+            bandService.modifyBand(bandDto, id);
             return ResponseEntity.ok("Successfully updated band.");
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());

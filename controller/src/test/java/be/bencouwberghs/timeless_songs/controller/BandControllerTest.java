@@ -59,7 +59,7 @@ class BandControllerTest {
 
         bandController.modifyBand(bandDto2,id);
 
-        verify(bandService).modifyBand(bandDto2);
+        verify(bandService).modifyBand(bandDto2, id);
     }
 
     @Test
