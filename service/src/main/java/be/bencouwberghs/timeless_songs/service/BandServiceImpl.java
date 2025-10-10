@@ -30,11 +30,16 @@ public class BandServiceImpl implements BandService {
     }
 
 
-    public void modifyBand(BandDto bandDto) {
-        Band band = mapperEntities.mapBandDtoToBandEntity(bandDto);
+    public void modifyBand(BandDto bandDto, Long id) {
+        Band band = bandRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Band not found with ID: " + id));
+
         if (bandRepository.existsByNameAndIdNot(band.getName(), band.getId())) {
             throw new EntityExistsException("Changed band name is already taken: " + band.getName());
         }
+
+        mapperEntities.updateBandEntityFromDto(band, bandDto);
+
         bandRepository.save(band);
     }
 
