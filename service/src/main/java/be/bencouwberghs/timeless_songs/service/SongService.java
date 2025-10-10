@@ -13,4 +13,5 @@ public interface SongService {
     SongDto fetchSong(Long id);
     List<SongDto> fetchAllSongs();
     List<SongDto> fetchAllSongsOfBand(Band band);
+    SongDto findSongByName(String name);
 }

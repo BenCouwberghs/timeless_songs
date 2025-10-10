@@ -2,6 +2,7 @@ package be.bencouwberghs.timeless_songs.service;
 
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.Song;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
@@ -58,5 +59,9 @@ public class SongServiceImpl implements SongService {
 
     public List<SongDto> fetchAllSongsOfBand(Band band) {
         return mapperEntities.mapSongEntitiesToDtos(songRepository.findAllByBand(band));
+    }
+
+    public SongDto findSongByName(String name) {
+        return mapperEntities.mapSongEntityToDto(songRepository.findByName(name));
     }
 }

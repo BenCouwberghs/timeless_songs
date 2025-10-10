@@ -151,4 +151,19 @@ public class SongServiceImplTest {
 
         verify(songRepository).getReferenceById(id);
     }
+
+    @Test
+    void findSongByName() {
+        Song song5 = new Song() {{
+            setId(5L);
+            setName("song5");
+            setYear(1990);
+        }};
+
+        when(songRepository.findByName("song5")).thenReturn((song5));
+
+        songService.findSongByName("song5");
+
+        verify(songRepository).findByName("song5");
+    }
 }
