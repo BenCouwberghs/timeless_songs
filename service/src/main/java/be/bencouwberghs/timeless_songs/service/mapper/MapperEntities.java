@@ -49,7 +49,7 @@ public class MapperEntities {
         return SongDto.builder()
                 .id(song.getId())
                 .name(song.getName())
-                .band(song.getBand())
+                .bandDto(song.getBand()  != null ? mapBandEntityToDto(song.getBand()): null)
                 .year(song.getYear())
                 .wikiLinkPage(song.getLinkWikiPage())
                 .build();
@@ -67,7 +67,7 @@ public class MapperEntities {
         return Song.builder()
                 .id(songDto.getId())
                 .name(songDto.getName())
-                .band(songDto.getBand())
+                .band(songDto.getBandDto() != null ? mapBandDtoToBandEntity(songDto.getBandDto()): null)
                 .year(songDto.getYear())
                 .linkWikiPage(songDto.getWikiLinkPage())
                 .build();
@@ -75,7 +75,7 @@ public class MapperEntities {
 
     public Song updateSongEntityFromDto(Song song, SongDto songDto) {
         song.setName(songDto.getName());
-        song.setBand(songDto.getBand());
+        song.setBand(songDto.getBandDto() != null ? mapBandDtoToBandEntity(songDto.getBandDto()): null);
         song.setYear(songDto.getYear());
         song.setLinkWikiPage(songDto.getWikiLinkPage());
 
