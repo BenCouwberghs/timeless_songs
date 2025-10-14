@@ -4,6 +4,7 @@ import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
+import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import jakarta.persistence.EntityExistsException;
@@ -15,10 +16,12 @@ import java.util.List;
 @Service
 public class SongServiceImpl implements SongService {
     private final SongRepository songRepository;
+    private final BandRepository bandRepository;
     private final MapperEntities mapperEntities;
 
-    public SongServiceImpl(SongRepository songRepository, MapperEntities mapperEntities) {
+    public SongServiceImpl(SongRepository songRepository, BandRepository bandRepository, MapperEntities mapperEntities) {
         this.songRepository = songRepository;
+        this.bandRepository = bandRepository;
         this.mapperEntities = mapperEntities;
     }
 
@@ -57,7 +60,9 @@ public class SongServiceImpl implements SongService {
         return mapperEntities.mapSongEntitiesToDtos(songRepository.findAll());
     }
 
-    public List<SongDto> fetchAllSongsOfBand(Band band) {
+    public List<SongDto> fetchAllSongsOfBand(Long bandId) {
+        Band band = bandRepository.findById(bandId)
+                .orElseThrow(() -> new EntityNotFoundException("Band not found with id: " + bandId));
         return mapperEntities.mapSongEntitiesToDtos(songRepository.findAllByBand(band));
     }
 
