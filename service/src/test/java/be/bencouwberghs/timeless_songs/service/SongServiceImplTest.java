@@ -2,7 +2,9 @@ package be.bencouwberghs.timeless_songs.service;
 
 import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.Song;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
+import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,9 @@ public class SongServiceImplTest {
 
     @Mock
     private SongRepository songRepository;
+
+    @Mock
+    private BandRepository bandRepository;
 
     @Mock
     private MapperEntities mapperEntities;
@@ -110,27 +115,49 @@ public class SongServiceImplTest {
 
     @Test
     void fetchAllSongsOfBand() {
+        BandDto bandDto = new BandDto() {{
+            setId(1L);
+            setName("band");
+        }};
+
         Band band = new Band() {{
             setId(1L);
             setName("band");
         }};
 
-        SongDto songDto4 = new SongDto() {{
+        Song song4 = new Song() {{
             setId(4L);
             setName("song4");
             setYear(1990);
             setBand(band);
         }};
 
-        SongDto songDto5 = new SongDto() {{
+        Song song5 = new Song() {{
             setId(5L);
             setName("song5");
             setYear(1990);
             setBand(band);
         }};
 
-        when(mapperEntities.mapSongEntitiesToDtos(songRepository.findAllByBand(band))).thenReturn(List.of(songDto4, songDto5));
-        var songList = songService.fetchAllSongsOfBand(band);
+        SongDto songDto4 = new SongDto() {{
+            setId(4L);
+            setName("song4");
+            setYear(1990);
+            setBandDto(bandDto);
+        }};
+
+        SongDto songDto5 = new SongDto() {{
+            setId(5L);
+            setName("song5");
+            setYear(1990);
+            setBandDto(bandDto);
+        }};
+
+        when(bandRepository.findById(bandDto.getId())).thenReturn(Optional.of(band));
+        when(songRepository.findAllByBand(band)).thenReturn(List.of(song4, song5));
+        when(mapperEntities.mapSongEntitiesToDtos(List.of(song4, song5))).thenReturn(List.of(songDto4, songDto5));
+
+        var songList = songService.fetchAllSongsOfBand(bandDto.getId());
 
         assertThat(songList).isNotNull();
         assertThat(songList.size()).isEqualTo(2);
