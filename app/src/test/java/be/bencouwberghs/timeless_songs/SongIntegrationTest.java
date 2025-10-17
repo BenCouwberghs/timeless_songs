@@ -1,7 +1,8 @@
 package be.bencouwberghs.timeless_songs;
 
-import be.bencouwberghs.timeless_songs.model.Band;
 import be.bencouwberghs.timeless_songs.model.Song;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
+import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import be.bencouwberghs.timeless_songs.repository.SongRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import be.bencouwberghs.timeless_songs.service.SongService;
@@ -35,104 +36,109 @@ public class SongIntegrationTest {
 
     @Test
     void addSong() {
-        Song song1 = new Song();
+        SongDto songDto1 = new SongDto();
 
-        song1.setName("song 1");
-        song1.setYear(1990);
+        songDto1.setName("song 1");
+        songDto1.setYear(1990);
 
-        songService.addSong(song1);
+        songService.addSong(songDto1);
 
-        assertTrue(songService.fetchAllSongs().contains(song1));
+        assertNotNull(songService.findSongByName("song 1"));
     }
 
     @Test
     void modifySong() {
-        Song song2 = new Song();
+        SongDto songDto2 = new SongDto();
 
-        song2.setName("song 2");
-        song2.setYear(1990);
+        songDto2.setName("song 2");
+        songDto2.setYear(1990);
 
-        songService.addSong(song2);
+        songService.addSong(songDto2);
+        songDto2 = songService.findSongByName("song 2");
 
-        song2.setName("Imagine");
-        songService.modifySong(song2);
+        songDto2.setName("Imagine");
+        songService.modifySong(songDto2, songDto2.getId());
 
-        assertEquals(song2, songRepository.findByName("Imagine"));
+        assertEquals(songDto2, songService.findSongByName("Imagine"));
     }
 
     @Test
     void deleteSong() {
-        Song song3 = new Song();
+        SongDto songDto3 = new SongDto();
 
-        song3.setName("song 3");
-        song3.setYear(1990);
+        songDto3.setName("song 3");
+        songDto3.setYear(1990);
 
-        songService.addSong(song3);
-        songService.deleteSongById(song3.getId());
+        songService.addSong(songDto3);
+        songDto3 = songService.findSongByName("song 3");
+        songService.deleteSongById(songDto3.getId());
 
         assertEquals(0, songService.fetchAllSongs().size());
     }
 
     @Test
     void fetchAllSongs() {
-        Song song4 = new Song();
+        SongDto songDto4 = new SongDto();
 
-        song4.setName("song 4");
-        song4.setYear(1990);
+        songDto4.setName("song 4");
+        songDto4.setYear(1990);
 
-        Song song5 = new Song();
+        SongDto songDto5 = new SongDto();
 
-        song5.setName("song 5");
-        song5.setYear(1990);
+        songDto5.setName("song 5");
+        songDto5.setYear(1990);
 
-        songService.addSong(song4);
-        songService.addSong(song5);
+        songService.addSong(songDto4);
+        songService.addSong(songDto5);
 
         assertEquals(2, songService.fetchAllSongs().size());
     }
 
     @Test
     void fetchAllSongsOfBand() {
-        Band band = new Band();
-        band.setName("Beatles");
+        BandDto bandDto = new BandDto();
+        bandDto.setName("Beatles");
 
-        Song song6 = new Song();
+        bandService.addBand(bandDto);
+        bandDto = bandService.findBandByName("Beatles");
 
-        song6.setName("song 6");
-        song6.setYear(1990);
-        song6.setBand(band);
+        SongDto songDto6 = new SongDto();
 
-        Song song7 = new Song();
+        songDto6.setName("song 6");
+        songDto6.setYear(1990);
+        songDto6.setBandDto(bandDto);
 
-        song7.setName("song 7");
-        song7.setYear(1990);
-        song7.setBand(band);
+        SongDto songDto7 = new SongDto();
 
-        Song song8 = new Song();
+        songDto7.setName("song 7");
+        songDto7.setYear(1990);
+        songDto7.setBandDto(bandDto);
+
+        SongDto song8 = new SongDto();
 
         song8.setName("song 8");
         song8.setYear(1990);
 
-        bandService.addBand(band);
-
-        songService.addSong(song6);
-        songService.addSong(song7);
+        songService.addSong(songDto6);
+        songService.addSong(songDto7);
         songService.addSong(song8);
 
         assertEquals(3, songService.fetchAllSongs().size());
-        assertEquals(2, songService.fetchAllSongsOfBand(band).size());
+        assertEquals(2, songService.fetchAllSongsOfBand(bandDto.getId()).size());
     }
 
     @Test
     void auditSong() {
-        Song song9 = new Song();
+        SongDto songDto9 = new SongDto();
 
-        song9.setName("song 9");
-        song9.setYear(1990);
+        songDto9.setName("song 9");
+        songDto9.setYear(1990);
 
-        songService.addSong(song9);
-        song9.setName("Imagine");
-        songService.modifySong(song9);
+        songService.addSong(songDto9);
+        songDto9 = songService.findSongByName("song 9");
+
+        songDto9.setName("Imagine");
+        songService.modifySong(songDto9, songDto9.getId());
 
         Song updatedSong = songRepository.findByName("Imagine");
         assertTrue(updatedSong.getDateLastModified().isAfter(updatedSong.getCreatedDate()));
@@ -140,13 +146,14 @@ public class SongIntegrationTest {
 
     @Test
     void getSong() {
-        Song song10 = new Song();
+        SongDto songDto10 = new SongDto();
 
-        song10.setName("song 1");
-        song10.setYear(1990);
+        songDto10.setName("song 1");
+        songDto10.setYear(1990);
 
-        songService.addSong(song10);
+        songService.addSong(songDto10);
+        songDto10 = songService.findSongByName("song 1");
 
-        assertEquals(song10, songService.fetchSong(song10.getId()));
+        assertEquals(songDto10, songService.fetchSong(songDto10.getId()));
     }
 }

@@ -21,9 +21,6 @@ import static org.mockito.Mockito.*;
 class BandControllerTest {
 
     @Mock
-    private MapperEntities mapperEntities;
-
-    @Mock
     private ValidateEntities validateEntities;
 
     @Mock
@@ -40,18 +37,11 @@ class BandControllerTest {
                 .comments("testComments 1")
                 .build();
 
-        Band band = new Band() {{
-            setName("band 1");
-            setLinkWikiPage("testLink 1");
-            setComments("testComments 1");
-        }};
-
         doNothing().when(validateEntities).validateBand(bandDto);
-        when(mapperEntities.mapBandDtoToBandEntity(bandDto)).thenReturn(band);
 
         bandController.addBand(bandDto);
 
-        verify(bandService).addBand(band);
+        verify(bandService).addBand(bandDto);
     }
 
     @Test
@@ -63,20 +53,13 @@ class BandControllerTest {
                 .comments("testComments 2")
                 .build();
 
-        Band band2 = new Band() {{
-            setId(2L);
-            setName("band 7");
-            setLinkWikiPage("testLink 7");
-            setComments("testComments 7");
-        }};
+        Long id = 2L;
 
         doNothing().when(validateEntities).validateBand(bandDto2);
-        when(bandService.fetchBand(band2.getId())).thenReturn(band2);
-        when(mapperEntities.updateBandEntityFromDto(band2, bandDto2)).thenReturn(band2);
 
-        bandController.modifyBand(bandDto2, band2.getId());
+        bandController.modifyBand(bandDto2,id);
 
-        verify(bandService).modifyBand(band2);
+        verify(bandService).modifyBand(bandDto2, id);
     }
 
     @Test
@@ -98,19 +81,19 @@ class BandControllerTest {
 
     @Test
     void getAllBands() {
-        Band band4 = new Band() {{
+        BandDto bandDto4 = new BandDto() {{
             setName("band 4");
             setLinkWikiPage("testLink 4");
             setComments("testComments 4");
         }};
 
-        Band band5 = new Band() {{
+        BandDto bandDto5 = new BandDto() {{
             setName("band 5");
             setLinkWikiPage("testLink 5");
             setComments("testComments 5");
         }};
 
-        when(bandService.fetchAllBands()).thenReturn(List.of(band4, band5));
+        when(bandService.fetchAllBands()).thenReturn(List.of(bandDto4, bandDto5));
         var bandList = bandController.getAllBands();
 
         assertThat(bandList).isNotNull();
@@ -119,7 +102,7 @@ class BandControllerTest {
 
     @Test
     void getBand() {
-        Band band6 = new Band() {{
+        BandDto bandDto6 = new BandDto() {{
             setId(6L);
             setName("band 6");
             setLinkWikiPage("testLink 6");
@@ -128,22 +111,21 @@ class BandControllerTest {
 
         Long id = 6L;
 
-        when(bandService.fetchBand(id)).thenReturn(band6);
+        when(bandService.fetchBand(id)).thenReturn(bandDto6);
         bandController.getBand(id);
 
-        verify(mapperEntities).mapBandEntityToDto(band6);
         verify(bandService).fetchBand(id);
     }
 
     @Test
     void search() {
-        Band band7 = new Band() {{
+        BandDto bandDto7 = new BandDto() {{
             setName("Beatles");
             setLinkWikiPage("testLink 7");
             setComments("testComments 7");
         }};
 
-        Band band8 = new Band() {{
+        BandDto bandDto8 = new BandDto() {{
             setName("Sabaton");
             setLinkWikiPage("testLink 8");
             setComments("testComments 8");
@@ -151,7 +133,7 @@ class BandControllerTest {
 
         String searchString = "Beatles";
 
-        when(bandService.search(searchString)).thenReturn(List.of(band7));
+        when(bandService.search(searchString)).thenReturn(List.of(bandDto7));
         var bandList = bandController.search(searchString);
 
         assertThat(bandList).isNotNull();

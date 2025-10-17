@@ -1,10 +1,8 @@
 package be.bencouwberghs.timeless_songs.controller;
 
-import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import be.bencouwberghs.timeless_songs.service.SongService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
-import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import be.bencouwberghs.timeless_songs.service.validator.ValidateEntities;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +16,13 @@ import java.util.List;
 public class SongController {
     private final SongService songService;
 
-    private final MapperEntities mapperEntities;
-
     private final ValidateEntities validateEntities;
 
     @PostMapping("/songs")
     public ResponseEntity<String> addSong(@RequestBody SongDto songDto) {
         try {
             validateEntities.validateSong(songDto);
-            Song newSong = mapperEntities.mapSongDtoToSongEntity(songDto);
-            songService.addSong(newSong);
+            songService.addSong(songDto);
             return ResponseEntity.ok("Successfully added the song " + songDto.getName());
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());
@@ -38,9 +33,7 @@ public class SongController {
     public ResponseEntity<String> modifySong(@RequestBody SongDto songDto, @PathVariable Long id) {
         try {
             validateEntities.validateSong(songDto);
-            Song song = songService.fetchSong(id);
-            song = mapperEntities.updateSongEntityFromDto(song, songDto);
-            songService.modifySong(song);
+            songService.modifySong(songDto, id);
             return ResponseEntity.ok("Successfully updated song.");
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());
@@ -58,12 +51,12 @@ public class SongController {
     }
 
     @GetMapping("/songs")
-    public List<Song> getAllSongs() {
+    public List<SongDto> getAllSongs() {
         return songService.fetchAllSongs();
     }
 
     @GetMapping("/songs/{id}")
     public SongDto getSong(@PathVariable Long id) {
-        return mapperEntities.mapSongEntityToDto(songService.fetchSong(id));
+        return songService.fetchSong(id);
     }
 }

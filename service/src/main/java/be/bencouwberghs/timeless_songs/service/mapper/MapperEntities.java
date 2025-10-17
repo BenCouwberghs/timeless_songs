@@ -6,6 +6,9 @@ import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MapperEntities {
     public BandDto mapBandEntityToDto(Band band) {
@@ -15,6 +18,14 @@ public class MapperEntities {
                 .linkWikiPage(band.getLinkWikiPage())
                 .comments(band.getComments())
                 .build();
+    }
+
+    public List<BandDto> mapBandEntitiesToDtos(List<Band> bands) {
+        List<BandDto> bandDtos = new ArrayList<>();
+        for (Band band : bands) {
+            bandDtos.add(mapBandEntityToDto(band));
+        }
+        return bandDtos;
     }
 
     public Band mapBandDtoToBandEntity(BandDto bandDto) {
@@ -38,17 +49,25 @@ public class MapperEntities {
         return SongDto.builder()
                 .id(song.getId())
                 .name(song.getName())
-                .band(song.getBand())
+                .bandDto(song.getBand()  != null ? mapBandEntityToDto(song.getBand()): null)
                 .year(song.getYear())
                 .wikiLinkPage(song.getLinkWikiPage())
                 .build();
+    }
+
+    public List<SongDto> mapSongEntitiesToDtos(List<Song> songs) {
+        List<SongDto> songDtos = new ArrayList<>();
+        for (Song song : songs) {
+            songDtos.add(mapSongEntityToDto(song));
+        }
+        return songDtos;
     }
 
     public Song mapSongDtoToSongEntity(SongDto songDto) {
         return Song.builder()
                 .id(songDto.getId())
                 .name(songDto.getName())
-                .band(songDto.getBand())
+                .band(songDto.getBandDto() != null ? mapBandDtoToBandEntity(songDto.getBandDto()): null)
                 .year(songDto.getYear())
                 .linkWikiPage(songDto.getWikiLinkPage())
                 .build();
@@ -56,7 +75,7 @@ public class MapperEntities {
 
     public Song updateSongEntityFromDto(Song song, SongDto songDto) {
         song.setName(songDto.getName());
-        song.setBand(songDto.getBand());
+        song.setBand(songDto.getBandDto() != null ? mapBandDtoToBandEntity(songDto.getBandDto()): null);
         song.setYear(songDto.getYear());
         song.setLinkWikiPage(songDto.getWikiLinkPage());
 
