@@ -1,5 +1,6 @@
 package be.bencouwberghs.timeless_songs.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class BandDto {
     private String linkWikiPage;
     private String comments;
     @Builder.Default
+    @JsonProperty("songs")
     private List<SongDto> songDtos = new ArrayList<>();
 }
