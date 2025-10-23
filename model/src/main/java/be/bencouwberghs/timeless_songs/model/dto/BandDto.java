@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,4 +17,6 @@ public class BandDto {
     private String name;
     private String linkWikiPage;
     private String comments;
+    @Builder.Default
+    private List<SongDto> songDtos = new ArrayList<>();
 }
