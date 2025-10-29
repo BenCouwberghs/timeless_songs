@@ -95,6 +95,7 @@ class MapperEntitiesTest {
             setId(1L);
             setName("song 1");
             setLinkWikiPage("testLink 1");
+            setYouTubeClipCode("code 1");
             setBand(band);
         }};
 
@@ -102,6 +103,7 @@ class MapperEntitiesTest {
                 .id(1L)
                 .name("song 1")
                 .wikiLinkPage("testLink 1")
+                .youTubeClipCode("code 1")
                 .bandDto(mapperEntities.mapBandEntityToDto(band))
                 .build();
 
@@ -121,6 +123,7 @@ class MapperEntitiesTest {
                 .id(2L)
                 .name("song 2")
                 .wikiLinkPage("testLink 2")
+                .youTubeClipCode("code 2")
                 .bandDto(bandDto)
                 .build();
 
@@ -128,6 +131,7 @@ class MapperEntitiesTest {
             setId(2L);
             setName("song 2");
             setLinkWikiPage("testLink 2");
+            setYouTubeClipCode("code 2");
             setBand(mapperEntities.mapBandDtoToBandEntity(bandDto));
         }};
 
