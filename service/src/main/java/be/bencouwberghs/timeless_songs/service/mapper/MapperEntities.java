@@ -62,6 +62,7 @@ public class MapperEntities {
                 .bandDto(mapBandEntityToDtoShallow(song.getBand()))
                 .year(song.getYear())
                 .wikiLinkPage(song.getLinkWikiPage())
+                .youTubeClipCode(song.getYouTubeClipCode())
                 .build();
     }
 
@@ -80,6 +81,7 @@ public class MapperEntities {
                 .band(mapBandDtoToBandEntity(songDto.getBandDto()))
                 .year(songDto.getYear())
                 .linkWikiPage(songDto.getWikiLinkPage())
+                .youTubeClipCode(songDto.getYouTubeClipCode())
                 .build();
     }
 
@@ -88,6 +90,7 @@ public class MapperEntities {
         song.setBand(mapBandDtoToBandEntity(songDto.getBandDto()));
         song.setYear(songDto.getYear());
         song.setLinkWikiPage(songDto.getWikiLinkPage());
+        song.setYouTubeClipCode(songDto.getYouTubeClipCode());
 
         return song;
     }

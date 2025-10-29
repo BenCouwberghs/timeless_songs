@@ -26,4 +26,7 @@ public class Song extends AuditableEntity {
 
     @Column(nullable = true)
     private String linkWikiPage;
+
+    @Column(nullable = true)
+    private String youTubeClipCode;
 }

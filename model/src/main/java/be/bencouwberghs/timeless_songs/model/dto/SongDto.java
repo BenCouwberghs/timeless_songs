@@ -17,4 +17,5 @@ public class SongDto {
     private BandDto bandDto;
     private int year;
     private String wikiLinkPage;
+    private String youTubeClipCode;
 }
