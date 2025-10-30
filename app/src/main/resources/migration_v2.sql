@@ -6,7 +6,7 @@ ADD COLUMN you_tube_clip_code VARCHAR(1024) NULL;
 
 CREATE TABLE genre (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    description TEXT NOT NULL
+    description VARCHAR(50) NOT NULL
 );
 
 INSERT INTO genre (description) VALUES
