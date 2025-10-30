@@ -63,6 +63,7 @@ public class MapperEntities {
                 .year(song.getYear())
                 .wikiLinkPage(song.getLinkWikiPage())
                 .youTubeClipCode(song.getYouTubeClipCode())
+                .genres(song.getGenres())
                 .build();
     }
 
@@ -82,6 +83,7 @@ public class MapperEntities {
                 .year(songDto.getYear())
                 .linkWikiPage(songDto.getWikiLinkPage())
                 .youTubeClipCode(songDto.getYouTubeClipCode())
+                .genres(songDto.getGenres())
                 .build();
     }
 
@@ -91,6 +93,7 @@ public class MapperEntities {
         song.setYear(songDto.getYear());
         song.setLinkWikiPage(songDto.getWikiLinkPage());
         song.setYouTubeClipCode(songDto.getYouTubeClipCode());
+        song.setGenres(songDto.getGenres());
 
         return song;
     }
