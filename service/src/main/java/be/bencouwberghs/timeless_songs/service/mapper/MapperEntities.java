@@ -18,6 +18,7 @@ public class MapperEntities {
                 .linkWikiPage(band.getLinkWikiPage())
                 .comments(band.getComments())
                 .songDtos(mapSongEntitiesToDtos(band.getSongs()))
+                .pinned(band.isPinned())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class MapperEntities {
                 .name(band.getName())
                 .linkWikiPage(band.getLinkWikiPage())
                 .comments(band.getComments())
+                .pinned(band.isPinned())
                 .build();
     }
 
@@ -44,6 +46,7 @@ public class MapperEntities {
                 .name(bandDto.getName())
                 .linkWikiPage(bandDto.getLinkWikiPage())
                 .comments(bandDto.getComments())
+                .pinned(bandDto.isPinned())
                 .build();
     }
 
@@ -51,6 +54,7 @@ public class MapperEntities {
         band.setName(bandDto.getName());
         band.setLinkWikiPage(bandDto.getLinkWikiPage());
         band.setComments(bandDto.getComments());
+        band.setPinned(bandDto.isPinned());
 
         return band;
     }

@@ -31,4 +31,5 @@ public class Band extends AuditableEntity {
     @Builder.Default
     private List<Song> songs = new ArrayList<>();
 
+    private boolean pinned;
 }
