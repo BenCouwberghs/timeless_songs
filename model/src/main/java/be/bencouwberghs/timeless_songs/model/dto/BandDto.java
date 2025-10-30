@@ -21,4 +21,5 @@ public class BandDto {
     @Builder.Default
     @JsonProperty("songs")
     private List<SongDto> songDtos = new ArrayList<>();
+    private boolean pinned;
 }
