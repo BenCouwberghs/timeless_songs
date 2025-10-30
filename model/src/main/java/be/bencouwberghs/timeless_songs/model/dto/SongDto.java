@@ -18,4 +18,5 @@ public class SongDto {
     private int year;
     private String wikiLinkPage;
     private String youTubeClipCode;
+    private String genres;
 }
