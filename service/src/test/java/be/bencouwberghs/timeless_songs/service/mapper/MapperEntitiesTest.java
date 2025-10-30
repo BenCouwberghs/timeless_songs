@@ -22,6 +22,7 @@ class MapperEntitiesTest {
             setLinkWikiPage("testLink 1");
             setComments("testComments 1");
             setSongs(new ArrayList<>());
+            setPinned(false);
         }};
 
         BandDto expected = BandDto.builder()
@@ -30,6 +31,7 @@ class MapperEntitiesTest {
                 .linkWikiPage("testLink 1")
                 .comments("testComments 1")
                 .songDtos(new ArrayList<>())
+                .pinned(false)
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandEntityToDto(band));
@@ -42,6 +44,7 @@ class MapperEntitiesTest {
             setName("band 2");
             setLinkWikiPage("testLink 2");
             setComments("testComments 2");
+            setPinned(true);
         }};
 
         BandDto bandDto = BandDto.builder()
@@ -49,6 +52,7 @@ class MapperEntitiesTest {
                 .name("band 2")
                 .linkWikiPage("testLink 2")
                 .comments("testComments 2")
+                .pinned(true)
                 .build();
 
         assertEquals(expected, mapperEntities.mapBandDtoToBandEntity(bandDto));
@@ -61,6 +65,7 @@ class MapperEntitiesTest {
             setName("band 3");
             setLinkWikiPage("testLink 3");
             setComments("testComments 3");
+            setPinned(false);
         }};
 
         BandDto bandDto = BandDto.builder()
@@ -68,6 +73,7 @@ class MapperEntitiesTest {
                 .name("band 3")
                 .linkWikiPage("testLink 3")
                 .comments("testComments 3")
+                .pinned(false)
                 .build();
 
 
@@ -76,6 +82,7 @@ class MapperEntitiesTest {
             setName("band 1");
             setLinkWikiPage("testLink 1");
             setComments("testComments 1");
+            setPinned(true);
         }};
 
         assertEquals(expected, mapperEntities.updateBandEntityFromDto(band, bandDto));
