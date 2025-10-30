@@ -29,4 +29,7 @@ public class Song extends AuditableEntity {
 
     @Column(nullable = true)
     private String youTubeClipCode;
+
+    @Column(nullable = true)
+    private String genres;
 }

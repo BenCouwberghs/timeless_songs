@@ -24,3 +24,5 @@ INSERT INTO genre (description) VALUES
 ('Ballad'),
 ('Love song');
 
+ALTER TABLE song
+ADD COLUMN genres VARCHAR(100) NULL;
