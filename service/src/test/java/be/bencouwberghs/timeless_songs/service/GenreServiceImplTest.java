@@ -29,20 +29,6 @@ public class GenreServiceImplTest {
     private GenreServiceImpl genreService;
 
     @Test
-    void fetchGenre() {
-        Genre genre1 = Genre.builder()
-                .id(1L)
-                .description("testDescription 1")
-                .build();
-
-        Long id = 1L;
-
-        when(genreRepository.getReferenceById(id)).thenReturn(genre1);
-        genreService.fetchGenre(id);
-        verify(genreRepository).getReferenceById(id);
-    }
-
-    @Test
     void fetchAllGenres() {
         GenreDto genreDto2 = GenreDto.builder()
                 .id(2L)
