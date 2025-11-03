@@ -9,6 +9,7 @@ import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -152,16 +153,28 @@ class MapperEntitiesTest {
     }
 
     @Test
-    void mapGenreEntityToGenreDto() {
-        Genre genre = Genre.builder()
+    void mapGenreEntitiesToGenreDtos() {
+        Genre genre1 = Genre.builder()
                 .id(1L)
                 .description("testDescription 1")
                 .build();
 
-        GenreDto expected = GenreDto.builder()
+        Genre genre2 = Genre.builder()
+                .id(2L)
+                .description("testDescription 2")
+                .build();
+
+        GenreDto genreDto1 = GenreDto.builder()
                 .id(1L)
                 .description("testDescription 1")
                 .build();
-        assertEquals(expected, mapperEntities.mapGenreEntityToGenreDto(genre));
+
+        GenreDto genreDto2 = GenreDto.builder()
+                .id(2L)
+                .description("testDescription 2")
+                .build();
+
+        assertEquals(List.of(genreDto1, genreDto2), mapperEntities.mapGenreEntitiesToDtos(List.of(genre1, genre2)));
+
     }
 }
