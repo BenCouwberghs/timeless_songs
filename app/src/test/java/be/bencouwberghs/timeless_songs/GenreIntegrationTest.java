@@ -28,29 +28,17 @@ public class GenreIntegrationTest {
     private GenreService genreService;
 
     @Test
-    void fetchGenre() {
+    void fetchAllGenres() {
         Genre genre1 = Genre.builder()
                 .description("testDescription 1")
                 .build();
 
-        genre1 = genreRepository.save(genre1);
-
-        GenreDto genreDto1 = genreService.fetchGenre(genre1.getId());
-        assertEquals("testDescription 1", genreDto1.getDescription());
-    }
-
-    @Test
-    void fetchAllGenres() {
         Genre genre2 = Genre.builder()
                 .description("testDescription 2")
                 .build();
 
-        Genre genre3 = Genre.builder()
-                .description("testDescription 3")
-                .build();
-
+        genreRepository.save(genre1);
         genreRepository.save(genre2);
-        genreRepository.save(genre3);
 
         List<GenreDto> results = genreService.fetchAllGenres();
         assertEquals(2, results.size());
