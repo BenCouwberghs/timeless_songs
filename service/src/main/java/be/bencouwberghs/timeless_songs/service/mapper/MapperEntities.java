@@ -104,7 +104,7 @@ public class MapperEntities {
         return song;
     }
 
-    public GenreDto mapGenreEntityToGenreDto(Genre genre) {
+    private GenreDto mapGenreEntityToGenreDto(Genre genre) {
         return GenreDto.builder()
                 .id(genre.getId())
                 .description(genre.getDescription())
