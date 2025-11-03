@@ -9,16 +9,12 @@ import java.util.List;
 
 @Service
 public class GenreServiceImpl implements GenreService {
-    private GenreRepository genreRepository;
-    private MapperEntities mapperEntities;
+    private final GenreRepository genreRepository;
+    private final MapperEntities mapperEntities;
 
     public GenreServiceImpl(GenreRepository genreRepository, MapperEntities mapperEntities) {
         this.genreRepository = genreRepository;
         this.mapperEntities = mapperEntities;
-    }
-
-    public GenreDto fetchGenre(Long id) {
-        return mapperEntities.mapGenreEntityToGenreDto(genreRepository.getReferenceById(id));
     }
 
     public List<GenreDto> fetchAllGenres() {
