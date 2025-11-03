@@ -1,8 +1,10 @@
 package be.bencouwberghs.timeless_songs.service.mapper;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.Genre;
 import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
+import be.bencouwberghs.timeless_songs.model.dto.GenreDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import org.junit.jupiter.api.Test;
 
@@ -147,5 +149,19 @@ class MapperEntitiesTest {
         }};
 
         assertEquals(expected, mapperEntities.mapSongDtoToSongEntity(songDto));
+    }
+
+    @Test
+    void mapGenreEntityToGenreDto() {
+        Genre genre = Genre.builder()
+                .id(1L)
+                .description("testDescription 1")
+                .build();
+
+        GenreDto expected = GenreDto.builder()
+                .id(1L)
+                .description("testDescription 1")
+                .build();
+        assertEquals(expected, mapperEntities.mapGenreEntityToGenreDto(genre));
     }
 }
