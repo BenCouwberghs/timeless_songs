@@ -108,6 +108,7 @@ class MapperEntitiesTest {
                 .youTubeClipCode("code 1")
                 .genres("1,3")
                 .rating(4)
+                .band(band)
                 .build();
 
         SongDto expected = SongDto.builder()
