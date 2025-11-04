@@ -32,4 +32,7 @@ public class Song extends AuditableEntity {
 
     @Column(nullable = true)
     private String genres;
+
+    @Column(nullable = true)
+    private int rating;
 }
