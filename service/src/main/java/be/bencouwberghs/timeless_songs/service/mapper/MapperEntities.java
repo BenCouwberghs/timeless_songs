@@ -1,8 +1,10 @@
 package be.bencouwberghs.timeless_songs.service.mapper;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.Genre;
 import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.BandDto;
+import be.bencouwberghs.timeless_songs.model.dto.GenreDto;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import org.springframework.stereotype.Service;
 
@@ -100,5 +102,20 @@ public class MapperEntities {
         song.setGenres(songDto.getGenres());
 
         return song;
+    }
+
+    private GenreDto mapGenreEntityToGenreDto(Genre genre) {
+        return GenreDto.builder()
+                .id(genre.getId())
+                .description(genre.getDescription())
+                .build();
+    }
+
+    public List<GenreDto> mapGenreEntitiesToDtos(List<Genre> genres) {
+        List<GenreDto> genreDtos = new ArrayList<>();
+        for (Genre genre : genres) {
+            genreDtos.add(mapGenreEntityToGenreDto(genre));
+        }
+        return genreDtos;
     }
 }
