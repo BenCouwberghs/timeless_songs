@@ -101,14 +101,14 @@ class MapperEntitiesTest {
                 .songs(new ArrayList<>())
                 .build();
 
-        Song song = new Song() {{
-            setId(1L);
-            setName("song 1");
-            setLinkWikiPage("testLink 1");
-            setYouTubeClipCode("code 1");
-            setGenres("1,3");
-            setBand(band);
-        }};
+        Song song = Song.builder()
+                .id(1L)
+                .name("song 1")
+                .linkWikiPage("testLink 1")
+                .youTubeClipCode("code 1")
+                .genres("1,3")
+                .rating(4)
+                .build();
 
         SongDto expected = SongDto.builder()
                 .id(1L)
@@ -116,6 +116,7 @@ class MapperEntitiesTest {
                 .wikiLinkPage("testLink 1")
                 .youTubeClipCode("code 1")
                 .genres("1,3")
+                .rating(4)
                 .bandDto(mapperEntities.mapBandEntityToDto(band))
                 .build();
 
@@ -137,17 +138,19 @@ class MapperEntitiesTest {
                 .wikiLinkPage("testLink 2")
                 .youTubeClipCode("code 2")
                 .genres("5")
+                .rating(2)
                 .bandDto(bandDto)
                 .build();
 
-        Song expected = new Song() {{
-            setId(2L);
-            setName("song 2");
-            setLinkWikiPage("testLink 2");
-            setYouTubeClipCode("code 2");
-            setGenres("5");
-            setBand(mapperEntities.mapBandDtoToBandEntity(bandDto));
-        }};
+        Song expected = Song.builder()
+                .id(2L)
+                .name("song 2")
+                .linkWikiPage("testLink 2")
+                .youTubeClipCode("code 2")
+                .genres("5")
+                .rating(2)
+                .band(mapperEntities.mapBandDtoToBandEntity(bandDto))
+                .build();
 
         assertEquals(expected, mapperEntities.mapSongDtoToSongEntity(songDto));
     }
