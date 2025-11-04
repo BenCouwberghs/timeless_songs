@@ -70,6 +70,7 @@ public class MapperEntities {
                 .wikiLinkPage(song.getLinkWikiPage())
                 .youTubeClipCode(song.getYouTubeClipCode())
                 .genres(song.getGenres())
+                .rating(song.getRating())
                 .build();
     }
 
@@ -90,6 +91,7 @@ public class MapperEntities {
                 .linkWikiPage(songDto.getWikiLinkPage())
                 .youTubeClipCode(songDto.getYouTubeClipCode())
                 .genres(songDto.getGenres())
+                .rating(songDto.getRating())
                 .build();
     }
 
