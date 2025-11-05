@@ -35,4 +35,4 @@ jobs:
           push: true
           tags: ghcr.io/bencouwberghs/timesless-songs-app:${{ github.ref_name }}
           build-args: |
-            API_YOU_TUBE_KEY=${secrets.API_YOU_TUBE_KEY}
+            API_YOU_TUBE_KEY=${{ secrets.API_YOU_TUBE_KEY }}
