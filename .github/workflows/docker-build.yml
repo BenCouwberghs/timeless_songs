@@ -30,9 +30,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
-        env: 
-          API_YOU_TUBE_KEY: ${{ secrets.API_YOU_TUBE_KEY }}
         with:
           context: .
           push: true
           tags: ghcr.io/bencouwberghs/timesless-songs-app:${{ github.ref_name }}
+          build-args: |
+            API_YOU_TUBE_KEY=${API_YOU_TUBE_KEY}
