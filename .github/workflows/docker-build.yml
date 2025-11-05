@@ -3,7 +3,8 @@ on:
   push:
     branches: [
         dev_v2,
-        release_v1
+        release_v1,
+        feature_88
     ]
 jobs:
   build-and-push:
@@ -29,6 +30,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
+        env: 
+          API_YOU_TUBE_KEY: ${{ secrets.ApiKeys }}
         with:
           context: .
           push: true
