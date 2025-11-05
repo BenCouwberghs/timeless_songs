@@ -27,7 +27,8 @@
 		<module>service</module>
 		<module>app</module>
 		<module>controller</module>
-	</modules>
+        <module>external-services</module>
+    </modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
