@@ -3,8 +3,7 @@ on:
   push:
     branches: [
         dev_v2,
-        release_v1,
-        feature_88
+        release_v1
     ]
 jobs:
   build-and-push:
