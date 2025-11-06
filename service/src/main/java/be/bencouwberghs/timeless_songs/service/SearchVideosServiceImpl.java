@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SearchVideosServiceImpl {
+public class SearchVideosServiceImpl implements SearchVideosService{
     private final YouTubeSearchService youTubeSearchService;
 
     public SearchVideosServiceImpl(YouTubeSearchService youTubeSearchService) {
