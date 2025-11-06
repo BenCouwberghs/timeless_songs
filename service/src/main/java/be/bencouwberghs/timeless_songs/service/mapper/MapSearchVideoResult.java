@@ -4,11 +4,18 @@ import be.bencouwberghs.timeless_songs.model.SearchVideoClipThumbnails;
 import be.bencouwberghs.timeless_songs.model.SearchVideoResult;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.ThumbnailDetails;
-import org.springframework.stereotype.Component;
 
-@Component
+import java.util.List;
+
+
 public class MapSearchVideoResult {
-    public SearchVideoResult map(SearchResult searchResult) {
+    public static List<SearchVideoResult> map(List<SearchResult> searchResults) {
+        return searchResults.stream()
+                .map(MapSearchVideoResult::mapSearchVideoResult)
+                .toList();
+    }
+
+    private static SearchVideoResult mapSearchVideoResult(SearchResult searchResult) {
         SearchVideoResult.SearchVideoResultBuilder searchVideoResultBuilder = SearchVideoResult.builder();
         searchVideoResultBuilder.source("youtube");
         if (searchResult.getSnippet().getTitle() != null) {
@@ -21,6 +28,16 @@ public class MapSearchVideoResult {
 
         SearchVideoResult searchVideoResult = searchVideoResultBuilder.build();
 
+        SearchVideoClipThumbnails.SearchVideoClipThumbnailsBuilder searchVideoClipThumbnailsBuilder = getSearchVideoClipThumbnailsBuilder(searchResult);
+
+
+        SearchVideoClipThumbnails searchVideoClipThumbnails = searchVideoClipThumbnailsBuilder.build();
+        searchVideoResult.setThumbnails(searchVideoClipThumbnails);
+
+        return searchVideoResult;
+    }
+
+    private static SearchVideoClipThumbnails.SearchVideoClipThumbnailsBuilder getSearchVideoClipThumbnailsBuilder(SearchResult searchResult) {
         ThumbnailDetails thumbnailDetails = searchResult.getSnippet().getThumbnails();
         SearchVideoClipThumbnails.SearchVideoClipThumbnailsBuilder searchVideoClipThumbnailsBuilder =
                 SearchVideoClipThumbnails.builder();
@@ -43,11 +60,6 @@ public class MapSearchVideoResult {
         if (thumbnailDetails.getMaxres() != null) {
             searchVideoClipThumbnailsBuilder.urlMaxRes(thumbnailDetails.getMaxres().getUrl());
         }
-
-
-        SearchVideoClipThumbnails searchVideoClipThumbnails = searchVideoClipThumbnailsBuilder.build();
-        searchVideoResult.setThumbnails(searchVideoClipThumbnails);
-
-        return searchVideoResult;
+        return searchVideoClipThumbnailsBuilder;
     }
 }
