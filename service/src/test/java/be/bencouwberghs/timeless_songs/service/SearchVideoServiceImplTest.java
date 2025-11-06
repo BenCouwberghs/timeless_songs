@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class SearchVideoServiceImplTest {
@@ -33,16 +33,21 @@ public class SearchVideoServiceImplTest {
         String bandName = "The Beatles";
         String songName = "Let it be";
 
-        SearchResult searchResult = new SearchResult();
+        List<SearchResult> searchResults = new ArrayList<>();
+        List<SearchVideoResult> searchVideoResults = new ArrayList<>();
 
         when(youTubeSearchService.searchByBandAndSong(bandName, songName))
-                .thenReturn(List.of(searchResult));
+                .thenReturn(searchResults);
 
-        when(mapSearchVideoResult.map(searchResult)).thenReturn(SearchVideoResult.builder().build());
+        try (MockedStatic<MapSearchVideoResult> mockedStatic = mockStatic(MapSearchVideoResult.class)) {
+            mockedStatic.when(() -> MapSearchVideoResult.map(searchResults))
+                    .thenReturn(searchVideoResults);
 
-        searchVideosService.searchByBandAndSong(bandName, songName);
 
-        verify(youTubeSearchService).searchByBandAndSong(bandName, songName);
-        verify(mapSearchVideoResult).map(searchResult);
+            searchVideosService.searchByBandAndSong(bandName, songName);
+
+            verify(youTubeSearchService).searchByBandAndSong(bandName, songName);
+            mockedStatic.verify(() -> MapSearchVideoResult.map(searchResults));
+        }
     }
 }
