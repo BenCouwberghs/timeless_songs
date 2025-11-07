@@ -29,3 +29,7 @@ ADD COLUMN genres VARCHAR(100) NULL;
 
 ALTER TABLE song
 ADD COLUMN rating INTEGER NULL;
+
+UPDATE song
+SET rating = 0
+WHERE rating IS NULL;
