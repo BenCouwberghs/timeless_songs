@@ -102,6 +102,7 @@ public class MapperEntities {
         song.setLinkWikiPage(songDto.getWikiLinkPage());
         song.setYouTubeClipCode(songDto.getYouTubeClipCode());
         song.setGenres(songDto.getGenres());
+        song.setRating(songDto.getRating());
 
         return song;
     }
