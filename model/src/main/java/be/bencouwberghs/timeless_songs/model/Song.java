@@ -34,6 +34,5 @@ public class Song extends AuditableEntity {
     private String genres;
 
     @Column(nullable = true)
-    @Builder.Default
-    private int rating = 0;
+    private Integer rating;
 }
