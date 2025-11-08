@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -192,5 +193,18 @@ public class SongServiceImplTest {
         songService.findSongByName("song5");
 
         verify(songRepository).findByName("song5");
+    }
+
+    @Test
+    void songRatingIntValueReturnsNullPointerException() {
+        Song song7 = new Song() {{
+            setId(7L);
+            setName("song7");
+            setYear(1990);
+        }};
+
+        assertThrows(NullPointerException.class, () -> {
+            int rating = song7.getRating();
+        });
     }
 }
