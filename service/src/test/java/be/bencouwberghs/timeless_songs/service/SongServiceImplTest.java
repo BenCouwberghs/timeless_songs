@@ -196,15 +196,15 @@ public class SongServiceImplTest {
     }
 
     @Test
-    void songRatingIntValueReturnsNullPointerException() {
-        Song song7 = new Song() {{
+    void songRatingIsNullThrowsNoException() {
+        SongDto song7 = new SongDto() {{
             setId(7L);
             setName("song7");
             setYear(1990);
         }};
 
         assertThrows(NullPointerException.class, () -> {
-            int rating = song7.getRating();
+            Integer rating = song7.getRating();
         });
     }
 }
