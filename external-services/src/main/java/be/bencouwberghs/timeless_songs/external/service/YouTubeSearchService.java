@@ -4,13 +4,13 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.SearchListResponse;
-import com.google.api.services.youtube.model.SearchResult;
+import com.google.api.services.youtube.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,5 +41,21 @@ public class YouTubeSearchService {
 
         SearchListResponse response = request.execute();
         return response.getItems();
+    }
+
+    public List<VideoContentDetails> findContentDetails(List<String> videoIds) throws IOException {
+        YouTube.Videos.List videoRequest = youtubeService.videos()
+                .list("contentDetails")
+                .setId(String.join(",", videoIds))
+                .setKey(API_KEY);
+
+        VideoListResponse videoResponse = videoRequest.execute();
+        List<Video> videoItems = videoResponse.getItems();
+
+        List<VideoContentDetails> contentDetails = new ArrayList<>();
+
+        videoItems.forEach(video -> contentDetails.add(video.getContentDetails()));
+
+        return contentDetails;
     }
 }
