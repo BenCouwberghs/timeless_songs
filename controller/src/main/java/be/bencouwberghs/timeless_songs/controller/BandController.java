@@ -6,6 +6,7 @@ import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
 import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import be.bencouwberghs.timeless_songs.service.validator.ValidateEntities;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +21,12 @@ public class BandController {
     private final ValidateEntities validateEntities;
 
     @PostMapping("/bands")
-    public ResponseEntity<String> addBand(@RequestBody BandDto bandDto) {
+    public ResponseEntity<?> addBand(@RequestBody BandDto bandDto) {
         try {
             validateEntities.validateBand(bandDto);
             bandService.addBand(bandDto);
-            return ResponseEntity.ok("Successfully added the band " + bandDto.getName());
+            bandDto = bandService.findBandByName(bandDto.getName());
+            return ResponseEntity.status(HttpStatus.CREATED).body(bandDto);
         } catch (UserInputException userInputException) {
             return ResponseEntity.badRequest().body(userInputException.getMessage());
         }
