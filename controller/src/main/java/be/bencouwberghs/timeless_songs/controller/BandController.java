@@ -21,7 +21,7 @@ public class BandController {
     private final ValidateEntities validateEntities;
 
     @PostMapping("/bands")
-    public ResponseEntity<?> addBand(@RequestBody BandDto bandDto) {
+    public ResponseEntity<BandDto> addBand(@RequestBody BandDto bandDto) {
         validateEntities.validateBand(bandDto);
         bandService.addBand(bandDto);
         bandDto = bandService.findBandByName(bandDto.getName());
