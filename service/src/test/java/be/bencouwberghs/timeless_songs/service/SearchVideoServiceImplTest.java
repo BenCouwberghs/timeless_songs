@@ -4,6 +4,7 @@ import be.bencouwberghs.timeless_songs.external.service.YouTubeSearchService;
 import be.bencouwberghs.timeless_songs.model.SearchVideoResult;
 import be.bencouwberghs.timeless_songs.service.mapper.MapSearchVideoResult;
 import com.google.api.services.youtube.model.SearchResult;
+import com.google.api.services.youtube.model.VideoContentDetails;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,20 +35,30 @@ public class SearchVideoServiceImplTest {
         String songName = "Let it be";
 
         List<SearchResult> searchResults = new ArrayList<>();
-        List<SearchVideoResult> searchVideoResults = new ArrayList<>();
+        SearchVideoResult searchVideoResult = SearchVideoResult.builder()
+                .videoId("testId1")
+                .build();
+        List<SearchVideoResult> searchVideoResults = List.of(searchVideoResult);
+        List<VideoContentDetails> contentDetails = new ArrayList<>();
 
         when(youTubeSearchService.searchByBandAndSong(bandName, songName))
                 .thenReturn(searchResults);
+
+        when(youTubeSearchService.findContentDetails(List.of("testId1"))).thenReturn(contentDetails);
 
         try (MockedStatic<MapSearchVideoResult> mockedStatic = mockStatic(MapSearchVideoResult.class)) {
             mockedStatic.when(() -> MapSearchVideoResult.map(searchResults))
                     .thenReturn(searchVideoResults);
 
+            mockedStatic.when(() -> MapSearchVideoResult.mapDurations(searchVideoResults, contentDetails))
+                    .thenAnswer(inv -> null);
 
             searchVideosService.searchByBandAndSong(bandName, songName);
 
             verify(youTubeSearchService).searchByBandAndSong(bandName, songName);
             mockedStatic.verify(() -> MapSearchVideoResult.map(searchResults));
+            verify(youTubeSearchService).findContentDetails(List.of("testId1"));
+            mockedStatic.verify(() -> MapSearchVideoResult.mapDurations(searchVideoResults, contentDetails));
         }
     }
 }
