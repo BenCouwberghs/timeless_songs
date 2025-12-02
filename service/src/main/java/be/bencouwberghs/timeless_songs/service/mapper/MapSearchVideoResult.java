@@ -4,6 +4,7 @@ import be.bencouwberghs.timeless_songs.model.SearchVideoClipThumbnails;
 import be.bencouwberghs.timeless_songs.model.SearchVideoResult;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.ThumbnailDetails;
+import com.google.api.services.youtube.model.VideoContentDetails;
 
 import java.util.List;
 
@@ -61,5 +62,12 @@ public class MapSearchVideoResult {
             searchVideoClipThumbnailsBuilder.urlMaxRes(thumbnailDetails.getMaxres().getUrl());
         }
         return searchVideoClipThumbnailsBuilder;
+    }
+
+    public static void mapDurations(List<SearchVideoResult> searchVideoResults, List<VideoContentDetails> contentDetails) {
+        for (int i = 0; i < searchVideoResults.size(); i++) {
+            String duration = contentDetails.get(i).getDuration();
+            searchVideoResults.get(i).setDuration(duration);
+        }
     }
 }

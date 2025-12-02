@@ -66,4 +66,30 @@ public class MapSearchVideoResultTest {
         searchResult.setId(searchResultId);
         return searchResult;
     }
+
+    @Test
+    void mapDurations() {
+        SearchVideoResult searchVideoResult1 = SearchVideoResult.builder()
+                .videoId("testId1")
+                .build();
+
+        SearchVideoResult searchVideoResult2 = SearchVideoResult.builder()
+                .videoId("testId2")
+                .build();
+
+        List<SearchVideoResult> searchVideoResults = List.of(searchVideoResult1, searchVideoResult2);
+
+        VideoContentDetails contentDetails1 = new VideoContentDetails();
+        contentDetails1.setDuration("PT3M10S");
+
+        VideoContentDetails contentDetails2 = new VideoContentDetails();
+        contentDetails2.setDuration("PT4M20S");
+
+        List<VideoContentDetails> contentDetails = List.of(contentDetails1, contentDetails2);
+
+        MapSearchVideoResult.mapDurations(searchVideoResults, contentDetails);
+
+        assert(searchVideoResult1.getDuration().equals("PT3M10S"));
+        assert(searchVideoResult2.getDuration().equals("PT4M20S"));
+    }
 }

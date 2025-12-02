@@ -12,4 +12,5 @@ public class SearchVideoResult {
     private String title;
     private String videoId;
     private SearchVideoClipThumbnails thumbnails;
+    private String duration;
 }
