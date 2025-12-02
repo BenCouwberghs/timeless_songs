@@ -31,11 +31,6 @@ public class YouTubeSearchService {
         ).setApplicationName(APPLICATION_NAME).build();
     }
 
-    public YouTubeSearchService(String apiKey, YouTube youtubeService) {
-        this.API_KEY = apiKey;
-        this.youtubeService = youtubeService;
-    }
-
     public List<SearchResult> searchByBandAndSong(String bandName, String songName) throws IOException {
         YouTube.Search.List request = youtubeService.search()
                 .list("snippet")
