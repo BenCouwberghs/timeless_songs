@@ -108,6 +108,7 @@ class MapperEntitiesTest {
                 .youTubeClipCode("code 1")
                 .genres("1,3")
                 .rating(4)
+                .duration("PT3M10S")
                 .band(band)
                 .build();
 
@@ -118,6 +119,7 @@ class MapperEntitiesTest {
                 .youTubeClipCode("code 1")
                 .genres("1,3")
                 .rating(4)
+                .duration("PT3M10S")
                 .bandDto(mapperEntities.mapBandEntityToDto(band))
                 .build();
 
@@ -140,6 +142,7 @@ class MapperEntitiesTest {
                 .youTubeClipCode("code 2")
                 .genres("5")
                 .rating(2)
+                .duration("PT4M20S")
                 .bandDto(bandDto)
                 .build();
 
@@ -150,6 +153,7 @@ class MapperEntitiesTest {
                 .youTubeClipCode("code 2")
                 .genres("5")
                 .rating(2)
+                .duration("PT4M20S")
                 .band(mapperEntities.mapBandDtoToBandEntity(bandDto))
                 .build();
 
