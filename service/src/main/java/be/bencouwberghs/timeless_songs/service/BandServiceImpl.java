@@ -21,12 +21,13 @@ public class BandServiceImpl implements BandService {
     }
 
 
-    public void addBand(BandDto bandDto) {
+    public Long addBand(BandDto bandDto) {
         Band band = mapperEntities.mapBandDtoToBandEntity(bandDto);
         if (bandRepository.existsByName(band.getName())) {
             throw new EntityExistsException("Band name taken: " + band.getName());
         }
-        bandRepository.save(band);
+        Band saved = bandRepository.save(band);
+        return saved.getId();
     }
 
 
