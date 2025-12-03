@@ -23,9 +23,8 @@ public class BandController {
     @PostMapping("/bands")
     public ResponseEntity<BandDto> addBand(@RequestBody BandDto bandDto) {
         validateEntities.validateBand(bandDto);
-        bandService.addBand(bandDto);
-        bandDto = bandService.findBandByName(bandDto.getName());
-        return ResponseEntity.status(HttpStatus.CREATED).body(bandDto);
+        Long bandId = bandService.addBand(bandDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bandService.fetchBand(bandId));
     }
 
     @PatchMapping("/bands/{id}")
