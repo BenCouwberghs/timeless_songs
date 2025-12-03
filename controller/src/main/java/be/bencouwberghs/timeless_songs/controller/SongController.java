@@ -20,34 +20,22 @@ public class SongController {
 
     @PostMapping("/songs")
     public ResponseEntity<String> addSong(@RequestBody SongDto songDto) {
-        try {
-            validateEntities.validateSong(songDto);
-            songService.addSong(songDto);
-            return ResponseEntity.ok("Successfully added the song " + songDto.getName());
-        } catch (UserInputException userInputException) {
-            return ResponseEntity.badRequest().body(userInputException.getMessage());
-        }
+        validateEntities.validateSong(songDto);
+        songService.addSong(songDto);
+        return ResponseEntity.ok("Successfully added the song " + songDto.getName());
     }
 
     @PatchMapping("/songs/{id}")
     public ResponseEntity<String> modifySong(@RequestBody SongDto songDto, @PathVariable Long id) {
-        try {
-            validateEntities.validateSong(songDto);
-            songService.modifySong(songDto, id);
-            return ResponseEntity.ok("Successfully updated song.");
-        } catch (UserInputException userInputException) {
-            return ResponseEntity.badRequest().body(userInputException.getMessage());
-        }
+        validateEntities.validateSong(songDto);
+        songService.modifySong(songDto, id);
+        return ResponseEntity.ok("Successfully updated song.");
     }
 
     @DeleteMapping("/songs/{id}")
     public ResponseEntity<String> deleteSong(@PathVariable Long id) {
-        try {
-            songService.deleteSongById(id);
-            return ResponseEntity.ok("Successfully deleted song.");
-        } catch (Exception e) {
-            return  ResponseEntity.badRequest().body(e.getMessage());
-        }
+        songService.deleteSongById(id);
+        return ResponseEntity.ok("Successfully deleted song.");
     }
 
     @GetMapping("/songs")
