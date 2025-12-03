@@ -71,6 +71,7 @@ public class MapperEntities {
                 .youTubeClipCode(song.getYouTubeClipCode())
                 .genres(song.getGenres())
                 .rating(song.getRating())
+                .duration(song.getDuration())
                 .build();
     }
 
@@ -92,6 +93,7 @@ public class MapperEntities {
                 .youTubeClipCode(songDto.getYouTubeClipCode())
                 .genres(songDto.getGenres())
                 .rating(songDto.getRating())
+                .duration(songDto.getDuration())
                 .build();
     }
 
@@ -103,6 +105,7 @@ public class MapperEntities {
         song.setYouTubeClipCode(songDto.getYouTubeClipCode());
         song.setGenres(songDto.getGenres());
         song.setRating(songDto.getRating());
+        song.setDuration(songDto.getDuration());
 
         return song;
     }
