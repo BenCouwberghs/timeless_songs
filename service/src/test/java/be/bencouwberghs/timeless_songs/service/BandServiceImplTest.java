@@ -69,6 +69,7 @@ class BandServiceImplTest {
         }};
 
         when(mapperEntities.mapBandDtoToBandEntity(bandDto3)).thenReturn(band3);
+        when(bandRepository.save(band3)).thenReturn(band3);
         bandService.addBand(bandDto3);
 
         verify(bandRepository).save(band3);

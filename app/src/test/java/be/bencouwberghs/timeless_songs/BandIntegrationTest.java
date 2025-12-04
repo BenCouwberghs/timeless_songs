@@ -51,8 +51,7 @@ public class BandIntegrationTest {
         bandDto4.setLinkWikiPage("testLink4");
         bandDto4.setComments("testComments 4");
 
-        bandService.addBand(bandDto4);
-        bandDto4 = bandService.findBandByName("band 4");
+        bandDto4.setId(bandService.addBand(bandDto4));
 
         bandDto4.setName("Beatles");
 
@@ -72,8 +71,7 @@ public class BandIntegrationTest {
         bandDto5.setLinkWikiPage("testLink5");
         bandDto5.setComments("testComments 5");
 
-        bandService.addBand(bandDto5);
-        bandDto5 = bandService.findBandByName("band 5");
+        bandDto5.setId(bandService.addBand(bandDto5));
         bandService.deleteBandById(bandDto5.getId());
 
         assertEquals(0, bandService.fetchAllBands().size());
@@ -107,8 +105,7 @@ public class BandIntegrationTest {
         bandDto.setLinkWikiPage("testLink1");
         bandDto.setComments("testComments 1");
 
-        bandService.addBand(bandDto);
-        bandDto = bandService.findBandByName("band 1");
+        bandDto.setId(bandService.addBand(bandDto));
 
         bandDto.setName("Beatles");
         bandService.modifyBand(bandDto, bandDto.getId());
@@ -129,8 +126,7 @@ public class BandIntegrationTest {
         bandDto.setLinkWikiPage("testLink1");
         bandDto.setComments("testComments 1");
 
-        bandService.addBand(bandDto);
-        bandDto = bandService.findBandByName("band 1");
+        bandDto.setId(bandService.addBand(bandDto));
 
         assertEquals(bandDto, bandService.fetchBand(bandDto.getId()));
     }

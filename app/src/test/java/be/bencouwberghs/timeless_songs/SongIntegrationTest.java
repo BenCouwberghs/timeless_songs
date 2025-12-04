@@ -139,14 +139,12 @@ public class SongIntegrationTest {
         BandDto bandDto1 = new BandDto();
         bandDto1.setName("Beatles");
 
-        bandService.addBand(bandDto1);
-        bandDto1 = bandService.findBandByName("Beatles");
+        bandDto1.setId(bandService.addBand(bandDto1));
 
         BandDto bandDto2 = new BandDto();
         bandDto2.setName("Sabaton");
 
-        bandService.addBand(bandDto2);
-        bandDto2 = bandService.findBandByName("Sabaton");
+        bandDto2.setId(bandService.addBand(bandDto2));
 
         SongDto songDto6 = new SongDto();
 
