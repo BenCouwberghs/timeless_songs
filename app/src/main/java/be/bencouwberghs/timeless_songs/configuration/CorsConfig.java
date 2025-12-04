@@ -15,6 +15,7 @@ public class CorsConfig implements WebMvcConfigurer {
                         "http://localhost",
                         "http://times-less-songs-app:8080",
                         "https://v1.timeless-songs.feco.be",
+                        "https://v2.timeless-songs.feco.be",
                         "https://timeless-songs.feco.be",
                         "https://dev-v2.timeless-songs.feco.be"
                 )
