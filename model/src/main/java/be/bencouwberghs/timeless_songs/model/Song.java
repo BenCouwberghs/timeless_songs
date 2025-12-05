@@ -18,7 +18,7 @@ public class Song extends AuditableEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "band_id", nullable = true)
+    @JoinColumn(name = "band_id", nullable = false)
     private Band band;
 
     @Column(nullable = true)
@@ -26,4 +26,16 @@ public class Song extends AuditableEntity {
 
     @Column(nullable = true)
     private String linkWikiPage;
+
+    @Column(nullable = true)
+    private String youTubeClipCode;
+
+    @Column(nullable = true)
+    private String genres;
+
+    @Column(nullable = true)
+    private Integer rating;
+
+    @Column(nullable = true)
+    private String duration;
 }

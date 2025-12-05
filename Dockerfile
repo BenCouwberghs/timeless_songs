@@ -1,6 +1,9 @@
 # Stage 1: Build the application
 FROM maven:3.9.6-eclipse-temurin-21 AS builder
 
+ARG API_YOU_TUBE_KEY
+ENV API_YOU_TUBE_KEY=$API_YOU_TUBE_KEY
+
 WORKDIR /build_dir
 COPY . .
 RUN mvn clean package
