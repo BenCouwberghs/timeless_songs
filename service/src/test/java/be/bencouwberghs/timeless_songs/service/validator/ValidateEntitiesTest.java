@@ -25,6 +25,7 @@ class ValidateEntitiesTest {
         BandDto bandDto = BandDto.builder()
                 .name("band 2")
                 .linkWikiPage("testLink 2")
+                .comments("testComments 2")
                 .build();
 
         assertDoesNotThrow(() -> validateEntities.validateBand(bandDto));
@@ -35,6 +36,7 @@ class ValidateEntitiesTest {
         BandDto bandDto = BandDto.builder()
                 .name("")
                 .linkWikiPage("")
+                .comments("")
                 .build();
 
         assertThrows(UserInputException.class, () -> validateEntities.validateBand(bandDto));

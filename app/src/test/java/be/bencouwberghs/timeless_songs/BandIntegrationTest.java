@@ -1,6 +1,7 @@
 package be.bencouwberghs.timeless_songs;
 
 import be.bencouwberghs.timeless_songs.model.Band;
+import be.bencouwberghs.timeless_songs.model.dto.BandDto;
 import be.bencouwberghs.timeless_songs.repository.BandRepository;
 import be.bencouwberghs.timeless_songs.service.BandService;
 import jakarta.persistence.EntityManager;
@@ -31,76 +32,83 @@ public class BandIntegrationTest {
 
     @Test
     void addBand() {
-        Band band3 = new Band();
+        BandDto bandDto3 = new BandDto();
 
-        band3.setName("band 3");
-        band3.setLinkWikiPage("testlink3");
+        bandDto3.setName("band 3");
+        bandDto3.setLinkWikiPage("testLink3");
+        bandDto3.setComments("testComments 3");
 
-        bandService.addBand(band3);
+        bandService.addBand(bandDto3);
 
         assertNotNull(bandService.findBandByName("band 3"));
     }
 
     @Test
     void modifyBand() {
-        Band band4 = new Band();
+        BandDto bandDto4 = new BandDto();
 
-        band4.setName("band 4");
-        band4.setLinkWikiPage("testlink4");
+        bandDto4.setName("band 4");
+        bandDto4.setLinkWikiPage("testLink4");
+        bandDto4.setComments("testComments 4");
 
-        bandService.addBand(band4);
+        bandDto4.setId(bandService.addBand(bandDto4));
 
-        band4.setName("Beatles");
+        bandDto4.setName("Beatles");
 
         entityManager.clear();
 
-        bandService.modifyBand(band4);
+        bandService.modifyBand(bandDto4, bandDto4.getId());
 
-        assertEquals(band4, bandService.findBandByName("Beatles"));
+
+        assertEquals(bandDto4, bandService.findBandByName("Beatles"));
     }
 
     @Test
     void deleteBand() {
-        Band band5 = new Band();
+        BandDto bandDto5 = new BandDto();
 
-        band5.setName("band 5");
-        band5.setLinkWikiPage("testlink5");
+        bandDto5.setName("band 5");
+        bandDto5.setLinkWikiPage("testLink5");
+        bandDto5.setComments("testComments 5");
 
-        bandService.addBand(band5);
-        bandService.deleteBandById(band5.getId());
+        bandDto5.setId(bandService.addBand(bandDto5));
+        bandService.deleteBandById(bandDto5.getId());
 
         assertEquals(0, bandService.fetchAllBands().size());
     }
 
     @Test
     void fetchAllBands() {
-        Band band1 = new Band();
+        BandDto bandDto1 = new BandDto();
 
-        band1.setName("band 1");
-        band1.setLinkWikiPage("testlink1");
+        bandDto1.setName("band 1");
+        bandDto1.setLinkWikiPage("testLink1");
+        bandDto1.setComments("testComments 1");
 
-        Band band2 = new Band();
+        BandDto bandDto2 = new BandDto();
 
-        band2.setName("band 2");
-        band2.setLinkWikiPage("testlink2");
+        bandDto2.setName("band 2");
+        bandDto2.setLinkWikiPage("testLink2");
+        bandDto2.setComments("testComments 2");
 
-        bandService.addBand(band1);
-        bandService.addBand(band2);
+        bandService.addBand(bandDto1);
+        bandService.addBand(bandDto2);
 
         assertEquals(2, bandService.fetchAllBands().size());
     }
 
     @Test
     void auditBand() {
-        Band band = new Band();
+        BandDto bandDto = new BandDto();
 
-        band.setName("band 1");
-        band.setLinkWikiPage("testlink1");
+        bandDto.setName("band 1");
+        bandDto.setLinkWikiPage("testLink1");
+        bandDto.setComments("testComments 1");
 
-        bandService.addBand(band);
+        bandDto.setId(bandService.addBand(bandDto));
 
-        band.setName("Beatles");
-        bandService.modifyBand(band);
+        bandDto.setName("Beatles");
+        bandService.modifyBand(bandDto, bandDto.getId());
 
         // got to fetch the updated audit values back from the DB
         // values only update this way when we call directly on the repository and not via the service,
@@ -112,31 +120,33 @@ public class BandIntegrationTest {
 
     @Test
     void getBand() {
-        Band band = new Band();
+        BandDto bandDto = new BandDto();
 
-        band.setName("band 1");
-        band.setLinkWikiPage("testlink1");
+        bandDto.setName("band 1");
+        bandDto.setLinkWikiPage("testLink1");
+        bandDto.setComments("testComments 1");
 
-        bandService.addBand(band);
-        band = bandService.findBandByName("band 1");
+        bandDto.setId(bandService.addBand(bandDto));
 
-        assertEquals(band, bandService.fetchBand(band.getId()));
+        assertEquals(bandDto, bandService.fetchBand(bandDto.getId()));
     }
 
     @Test
     void search() {
-        Band band6 = new Band();
+        BandDto bandDto6 = new BandDto();
 
-        band6.setName("band 6");
-        band6.setLinkWikiPage("testlink6");
+        bandDto6.setName("band 6");
+        bandDto6.setLinkWikiPage("testLink6");
+        bandDto6.setComments("testComments 6");
 
-        Band band7 = new Band();
+        BandDto bandDto7 = new BandDto();
 
-        band7.setName("band 7");
-        band7.setLinkWikiPage("testlink7");
+        bandDto7.setName("band 7");
+        bandDto7.setLinkWikiPage("testLink7");
+        bandDto7.setComments("testComments 7");
 
-        bandService.addBand(band6);
-        bandService.addBand(band7);
+        bandService.addBand(bandDto6);
+        bandService.addBand(bandDto7);
 
         String keyword = "7";
 

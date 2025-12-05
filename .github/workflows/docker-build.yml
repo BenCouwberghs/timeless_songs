@@ -2,8 +2,9 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [
-        dev_v1,
-        release_v1
+        dev_v2,
+        release_v1,
+        release_v2
     ]
 jobs:
   build-and-push:
@@ -33,3 +34,5 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/bencouwberghs/timesless-songs-app:${{ github.ref_name }}
+          build-args: |
+            API_YOU_TUBE_KEY=${{ secrets.API_YOU_TUBE_KEY }}

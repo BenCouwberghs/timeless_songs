@@ -4,7 +4,6 @@ import be.bencouwberghs.timeless_songs.model.Song;
 import be.bencouwberghs.timeless_songs.model.dto.SongDto;
 import be.bencouwberghs.timeless_songs.service.SongService;
 import be.bencouwberghs.timeless_songs.service.exception.UserInputException;
-import be.bencouwberghs.timeless_songs.service.mapper.MapperEntities;
 import be.bencouwberghs.timeless_songs.service.validator.ValidateEntities;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,9 +23,6 @@ class SongControllerTest {
     private SongService songService;
 
     @Mock
-    private MapperEntities mapperEntities;
-
-    @Mock
     private ValidateEntities validateEntities;
 
     @InjectMocks
@@ -40,18 +36,11 @@ class SongControllerTest {
                 .wikiLinkPage("testLink 1")
                 .build();
 
-        Song song = new Song() {{
-            setName("song 1");
-            setYear(1995);
-            setLinkWikiPage("testLink 1");
-        }};
-
         doNothing().when(validateEntities).validateSong(songDto);
-        when(mapperEntities.mapSongDtoToSongEntity(songDto)).thenReturn(song);
 
         songController.addSong(songDto);
 
-        verify(songService).addSong(song);
+        verify(songService).addSong(songDto);
     }
 
     @Test
@@ -63,20 +52,13 @@ class SongControllerTest {
                 .wikiLinkPage("testLink 2")
                 .build();
 
-        Song song2 = new Song() {{
-            setId(2L);
-            setName("song 5");
-            setYear(1995);
-            setLinkWikiPage("testLink 7");
-        }};
+        Long id = 2L;
 
         doNothing().when(validateEntities).validateSong(songDto2);
-        when(songService.fetchSong(song2.getId())).thenReturn(song2);
-        when(mapperEntities.updateSongEntityFromDto(song2, songDto2)).thenReturn(song2);
 
-        songController.modifySong(songDto2, song2.getId());
+        songController.modifySong(songDto2, id);
 
-        verify(songService).modifySong(song2);
+        verify(songService).modifySong(songDto2, id);
     }
 
     @Test
@@ -97,19 +79,19 @@ class SongControllerTest {
 
     @Test
     void getAllSongs() {
-        Song song4 = new Song() {{
+        SongDto songDto4 = new SongDto() {{
             setName("song 4");
             setYear(1995);
-            setLinkWikiPage("testLink 4");
+            setWikiLinkPage("testLink 4");
         }};
 
-        Song song5 = new Song() {{
+        SongDto songDto5 = new SongDto() {{
             setName("song 5");
             setYear(1995);
-            setLinkWikiPage("testLink 5");
+            setWikiLinkPage("testLink 5");
         }};
 
-        when(songService.fetchAllSongs()).thenReturn(List.of(song4, song5));
+        when(songService.fetchAllSongs()).thenReturn(List.of(songDto4, songDto5));
         var songList = songController.getAllSongs();
 
         assertThat(songList).isNotNull();
@@ -118,16 +100,16 @@ class SongControllerTest {
 
     @Test
     void getSong() {
-        Song song6 = new Song() {{
+        SongDto songDto6 = new SongDto() {{
             setId(6L);
             setName("song 6");
             setYear(1995);
-            setLinkWikiPage("testLink 6");
+            setWikiLinkPage("testLink 6");
         }};
 
         Long id = 6L;
 
-        when(songService.fetchSong(id)).thenReturn(song6);
+        when(songService.fetchSong(id)).thenReturn(songDto6);
         songController.getSong(id);
 
         verify(songService).fetchSong(id);
